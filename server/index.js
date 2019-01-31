@@ -5,9 +5,13 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+const { addControllers } = require('./controller')
+
 app.prepare()
   .then(() => {
     const server = express()
+
+    addControllers(server)
 
     server.get('/p/:id', (req, res) => {
       const actualPage = '/post'

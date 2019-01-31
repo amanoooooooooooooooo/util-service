@@ -10,19 +10,19 @@ const Post = (props) => (
   </Layout>
 )
 
-class Post2 extends React.Component {
-  render () {
-    const { props } = this
-    console.log('props is ', props)
-    return (
-      <Layout>
-        <h1>{props.show.name}</h1>
-        <p>{props.show.summary.replace(/<[/]?p>/g, '')}</p>
-        <img src={props.show.image.medium} />
-      </Layout>
-    )
-  }
-}
+// class Post2 extends React.Component {
+//   render () {
+//     const { props } = this
+//     console.log('props is ', props)
+//     return (
+//       <Layout>
+//         <h1>{props.show.name}</h1>
+//         <p>{props.show.summary.replace(/<[/]?p>/g, '')}</p>
+//         <img src={props.show.image.medium} />
+//       </Layout>
+//     )
+//   }
+// }
 
 Post.getInitialProps = async function (context) {
   const { id } = context.query
