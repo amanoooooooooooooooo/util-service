@@ -1,0 +1,11 @@
+{
+    "standard.autoFixOnSave": true,
+    "standard.validate": [
+        "javascript",
+        "javascriptreact",
+        "html",
+        "typescript"
+    ],
+    "javascript.validate.enable": false,
+    "standard.usePackageJson": true
+}
