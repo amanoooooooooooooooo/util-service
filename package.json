@@ -1,0 +1,21 @@
+{
+  "name": "util-service",
+  "version": "1.0.0",
+  "description": "api service for abb using nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "next": "^7.0.2",
+    "promise-mysql": "^3.3.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
