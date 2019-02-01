@@ -7,6 +7,7 @@ const getPosition = () => {
       navigator.geolocation.getCurrentPosition(
         function (position) {
           const { longitude, latitude } = position.coords || {}
+          console.log(position.coords)
           resolve({ longitude, latitude })
         },
         function (e) {
@@ -21,7 +22,8 @@ const getPosition = () => {
 class Position extends React.Component {
     state = {
       position: '',
-      ip: ''
+      privateIp: '',
+      publicIp: ''
     }
     async componentDidMount () {
       const res = await getPosition()
@@ -31,20 +33,25 @@ class Position extends React.Component {
         position: message || `longitude: ${longitude} latitude:${latitude}`
       })
       /* eslint-disable */
-      var findIP = new Promise((r, re) => { var w = window; var a = new (w.RTCPeerConnection || w.mozRTCPeerConnection || w.webkitRTCPeerConnection)({ iceServers: [] }); var b = () => {}; a.createDataChannel(''); a.createOffer(c => a.setLocalDescription(c, b, b), b); a.onicecandidate = c => { try { c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r) } catch (e) {} } })
+      const findIP = new Promise((r, re) => { var w = window; var a = new (w.RTCPeerConnection || w.mozRTCPeerConnection || w.webkitRTCPeerConnection)({ iceServers: [] }); var b = () => {}; a.createDataChannel(''); a.createOffer(c => a.setLocalDescription(c, b, b), b); a.onicecandidate = c => { try { c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r) } catch (e) {} } })
 
       /* Usage example */
-      findIP.then(ip => this.setState({
-        ip
+      findIP.then(privateIp => this.setState({
+        privateIp
       })).catch(e => console.error('findIP:', e))
+
+      fetch('https://api.ipify.org/').then(res => res.text()).then(publicIp => this.setState({
+        publicIp
+      }))
     }
     render () {
-      const { position, ip } = this.state
+      const { position, privateIp, publicIp } = this.state
       return <Layout>
         <h3>Your Geolocation</h3>
         <p>{position}</p>
         <h3>Your IP</h3>
-        <p>{ip}</p>
+        <li>{`private: ${privateIp}`}</li>
+        <li>{`public: ${publicIp}`}</li>
       </Layout>
     }
 }
