@@ -1,10 +1,18 @@
 import React from 'react'
 import Layout from '../components/MyLayout.js'
-import Request from '../func/Request'
+import Link from 'next/link'
 
 const Index = (props) => (
   <Layout>
-    <Request />
+    <p>打印机(printer)</p>
+    <br />
+    <Link href={`/printer/headers`}>
+      <a>请求头(request header)</a>
+    </Link>
+    <br />
+    <Link href={`/printer/position`}>
+      <a>地址(geolocation)</a>
+    </Link>
   </Layout>
 )
 
