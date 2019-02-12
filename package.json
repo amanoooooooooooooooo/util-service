@@ -31,6 +31,9 @@
     "plugins": [
       "html"
     ],
+    "globals": [
+      "test"
+    ],
     "ignore": [
       "node_modules/**"
     ],
