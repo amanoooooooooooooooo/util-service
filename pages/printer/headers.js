@@ -8,7 +8,7 @@ const DynamicReactJson = dynamic(import('react-json-view'), { ssr: false })
 class Header extends React.Component {
     state = {
       isRaw: false,
-      data: ''
+      data: {}
     }
     async componentDidMount () {
       const res = await fetch('../header').then(res => res.json())

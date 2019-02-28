@@ -13,6 +13,10 @@ const Index = (props) => (
     <Link href={`/printer/position`}>
       <a>地址(geolocation)</a>
     </Link>
+    <br />
+    <Link href={`/printer/dns`}>
+      <a>域名解析(dns)</a>
+    </Link>
   </Layout>
 )
 

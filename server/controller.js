@@ -1,12 +1,13 @@
 var fetch = require('isomorphic-unfetch')
 const Core = require('@alicloud/pop-core')
 
-const SECERT_ID = 'LTAIUKIAm1UCzLJt'
-const SECERT_KEY = 'u6C6Iv6ayprCnlMD8eLBFt1TuNDY2j'
+const SECERT_ID = process.env.SECERT_ID
+const SECERT_KEY = process.env.SECERT_KEY
+console.log('SECERT_ID is %s, SECERT_KEY is %s', SECERT_ID, SECERT_KEY)
 
 const Client = (secretId, secertKey) => new Core({
-  accessKeyId: secretId,
-  accessKeySecret: secertKey,
+  accessKeyId: secretId || SECERT_ID,
+  accessKeySecret: secertKey || SECERT_KEY,
   endpoint: 'https://alidns.aliyuncs.com',
   apiVersion: '2015-01-09'
 })
@@ -56,7 +57,7 @@ const addControllers = (server) => {
   })
   server.post('/dns/add', async (req, res) => {
     const { body } = req
-    const { secretId, secertKey, domainName, RR, type, value } = body || {}
+    const { secretId, secertKey, domainName = 'util.online', RR, type = 'A', value } = body || {}
     var client = Client(secretId, secertKey)
     const requestParams = {
       DomainName: domainName, // util.online
@@ -64,6 +65,7 @@ const addControllers = (server) => {
       Type: type, // A | NS | MX | TXT | CNAME | SRV | AAAA | CAA | REDIRECT_URL | FORWARD_URL refre to https://help.aliyun.com/document_detail/29805.html?spm=a2c4g.11186623.2.20.118a2846NGdMrE
       Value: value // 10.10.1.214
     }
+    console.log('requestParamsj is', requestParams)
     var requestOption = {
       method: 'POST'
     }
