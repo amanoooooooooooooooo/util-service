@@ -11,6 +11,9 @@ app.prepare()
   .then(() => {
     const server = express()
 
+    server.use(express.json()) // to support JSON-encoded bodies
+    server.use(express.urlencoded({ extended: true }))
+
     addControllers(server)
 
     server.get('/p/:id', (req, res) => {
