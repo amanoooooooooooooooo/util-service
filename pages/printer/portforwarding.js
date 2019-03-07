@@ -14,25 +14,51 @@ class PortForwarding extends React.Component {
       <h3>Method 1: Using Docker</h3>
       <p>Refer to <a target='_blank' href='https://hub.docker.com/r/amanohikaru/frp-docker'>frp-docker</a></p>
       <ol>
-        <li>Edit web_customname(Start with web)</li>
-        <li>Edit local port</li>
-        <li>Edit domain(Domain must resolve to server_addr)</li>
+        <li>Create frpc.ini.(Edit yellow field)</li>
+        <pre>
+          cat > frpc.ini &lt;&lt; EOF<br />
+          # frpc.ini<br />
+          <br />
+          [common]<br />
+          server_addr = 39.104.226.149<br />
+          server_port = 7000<br />
+          <br />
+          [web<em>_customname</em>]<br />
+          type = http<br />
+          local_port = <em>4000</em><br />
+          custom_domains = <em>amano</em>.util.online<br />
+          EOF<br />
+        </pre>
+        <li>Create Docker container</li>
+        <pre>
+          docker run --network host -d -v $(pwd)/frpc.ini:/conf/frpc.ini amanohikaru/frp-docker client<br />
+        </pre>
       </ol>
-      <pre>cat > frpc.ini &lt;&lt; EOF<br />
-            # frpc.ini<br />
-        <br />
-            [common]<br />
-            server_addr = 39.104.226.149<br />
-            server_port = 7000<br />
-        <br />
-            [<em>web_customname</em>]<br />
-            type = http<br />
-            local_port = <em>4000</em><br />
-            custom_domains = <em>amano</em>.util.online<br />
-            EOF<br />
-        <br />
-            docker run --network host -d -v $(pwd)/frpc.ini:/conf/frpc.ini amanohikaru/frp-docker client<br />
-      </pre>
+
+      <h3>Method 2: Using Release Executable File</h3>
+      <p>Refer to <a target='_blank' href='https://github.com/fatedier/frp'>github/frp</a></p>
+      <p>Download <a href='https://github.com/fatedier/frp/releases'>Release</a> </p>
+      <ol>
+        <li>Create frpc.ini.(Edit yellow field)</li>
+        <pre>
+          cat > frpc.ini &lt;&lt; EOF<br />
+          # frpc.ini<br />
+          <br />
+          [common]<br />
+          server_addr = 39.104.226.149<br />
+          server_port = 7000<br />
+          <br />
+          [web<em>_customname</em>]<br />
+          type = http<br />
+          local_port = <em>4000</em><br />
+          custom_domains = <em>amano</em>.util.online<br />
+          EOF<br />
+        </pre>
+        <li>Start Client</li>
+        <pre>
+          ./frpc -c ./frpc.ini
+        </pre>
+      </ol>
     </Layout>
   }
 }
