@@ -4,18 +4,22 @@ import Link from 'next/link'
 
 const Index = (props) => (
   <Layout>
-    <p>打印机(printer)</p>
+    <p>打印机(Printer)</p>
     <br />
     <Link href={`/printer/headers`}>
-      <a>请求头(request header)</a>
+      <a>请求头(Request Header)</a>
     </Link>
     <br />
     <Link href={`/printer/position`}>
-      <a>地址(geolocation)</a>
+      <a>地址(Geolocation)</a>
     </Link>
     <br />
     <Link href={`/printer/dns`}>
-      <a>域名解析(dns)</a>
+      <a>域名解析(Dns)</a>
+    </Link>
+    <br />
+    <Link href={`/printer/portforwarding`}>
+      <a>端口转发(Port Forwarding)</a>
     </Link>
   </Layout>
 )

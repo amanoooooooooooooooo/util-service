@@ -8,6 +8,19 @@ const layoutStyle = {
 
 const Layout = (props) => (
   <div style={layoutStyle}>
+    <style jsx global>{`
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: rgb(40, 44, 52);
+        color: rgb(171, 178, 191);
+        padding: 16px;
+        border-radius: 5px;
+      }
+      em {
+        color: #ffa11a;
+      }
+    `}</style>
     <Header />
     <hr />
     {props.children}
