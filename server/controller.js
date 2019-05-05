@@ -1,6 +1,8 @@
 var fetch = require('isomorphic-unfetch')
 const Core = require('@alicloud/pop-core')
 
+const { delay } = require('../utils')
+
 const SECERT_ID = process.env.SECERT_ID
 const SECERT_KEY = process.env.SECERT_KEY
 console.log('SECERT_ID is %s, SECERT_KEY is %s', SECERT_ID, SECERT_KEY)
@@ -12,7 +14,7 @@ const Client = (secretId, secertKey) => new Core({
   apiVersion: '2015-01-09'
 })
 const addControllers = (server) => {
-  server.get('/header', (req, res) => {
+  server.get('/headers', (req, res) => {
     res.json(req.headers)
   })
 
@@ -74,6 +76,12 @@ const addControllers = (server) => {
     }).catch(e => {
       res.json(e)
     })
+  })
+
+  server.get('/delay/:times', async (req, res) => {
+    const { times } = req.params
+    await delay(parseInt(times))
+    res.json('')
   })
 }
 module.exports = {

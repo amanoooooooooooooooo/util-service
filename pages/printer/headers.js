@@ -11,7 +11,7 @@ class Header extends React.Component {
       data: {}
     }
     async componentDidMount () {
-      const res = await fetch('../header').then(res => res.json())
+      const res = await fetch('../headers').then(res => res.json())
       this.setState({
         data: res
       })
