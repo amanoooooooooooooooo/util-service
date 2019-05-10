@@ -21,6 +21,10 @@ const Index = (props) => (
     <Link href={`/printer/portforwarding`}>
       <a>端口转发(Port Forwarding)</a>
     </Link>
+    <br />
+    <Link href={`/printer/portforwarding2`}>
+      <a>端口转发(Port Forwarding) * NEW</a>
+    </Link>
   </Layout>
 )
 

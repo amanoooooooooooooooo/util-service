@@ -1,9 +1,6 @@
 const express = require('express')
 const next = require('next')
 
-const io = require('./socket')
-const { addControllers } = require('./controller')
-
 const dev = process.env.NODE_ENV !== 'production'
 const LISTEN_PORT = process.env.LISTEN_PORT || 3000
 
@@ -11,11 +8,16 @@ const app = express()
 
 app.use(express.json()) // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true }))
-addControllers(app)
 
 const server = require('http').Server(app)
 
-io(server)
+const io = require('socket.io')(server)
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' })
+  socket.on('my other event', function (data) {
+    console.log(data)
+  })
+})
 
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()

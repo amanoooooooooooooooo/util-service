@@ -1,0 +1,9 @@
+const CMD_GENERATE = 'CMD_GENERATE'
+const CMD_CLOSE = 'CMD_CLOSE'
+const CMD_GET_CON = 'CMD_GET_CON'
+
+module.exports = {
+  CMD_GENERATE,
+  CMD_CLOSE,
+  CMD_GET_CON
+}
