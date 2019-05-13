@@ -4,8 +4,8 @@ const next = require('next')
 const io = require('./socket')
 const { addControllers } = require('./controller')
 
+const { LISTEN_PORT } = require('../constants')
 const dev = process.env.NODE_ENV !== 'production'
-const LISTEN_PORT = process.env.LISTEN_PORT || 3000
 
 const app = express()
 

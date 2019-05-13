@@ -8,21 +8,25 @@ const SECERT_ID = process.env.SECERT_ID
 const SECERT_KEY = process.env.SECERT_KEY
 console.log('SECERT_ID is %s, SECERT_KEY is %s', SECERT_ID, SECERT_KEY)
 
-const Client = (secretId, secertKey) => new Core({
-  accessKeyId: secretId || SECERT_ID,
-  accessKeySecret: secertKey || SECERT_KEY,
-  endpoint: 'https://alidns.aliyuncs.com',
-  apiVersion: '2015-01-09'
-})
-const addControllers = (server) => {
+const Client = (secretId, secertKey) =>
+  new Core({
+    accessKeyId: secretId || SECERT_ID,
+    accessKeySecret: secertKey || SECERT_KEY,
+    endpoint: 'https://alidns.aliyuncs.com',
+    apiVersion: '2015-01-09'
+  })
+const addControllers = server => {
   server.get('/headers', (req, res) => {
     res.json(req.headers)
   })
 
   server.get('/utilwebhook', async (req, res) => {
-    const resp = await fetch('http://39.104.226.149:9000/api/webhooks/376fc971-5cdf-4bcb-9a0d-78c9bdd12b1a', {
-      method: 'POST'
-    }).then((res) => res.text())
+    const resp = await fetch(
+      'http://39.104.226.149:9000/api/webhooks/376fc971-5cdf-4bcb-9a0d-78c9bdd12b1a',
+      {
+        method: 'POST'
+      }
+    ).then(res => res.text())
     res.json(resp)
   })
 
@@ -36,11 +40,14 @@ const addControllers = (server) => {
     var requestOption = {
       method: 'POST'
     }
-    client.request('DescribeDomainRecords', requestParams, requestOption).then((result) => {
-      res.json(result)
-    }).catch(e => {
-      res.json(e)
-    })
+    client
+      .request('DescribeDomainRecords', requestParams, requestOption)
+      .then(result => {
+        res.json(result)
+      })
+      .catch(e => {
+        res.json(e)
+      })
   })
   server.post('/dns/del', async (req, res) => {
     const { body } = req
@@ -52,15 +59,25 @@ const addControllers = (server) => {
     var requestOption = {
       method: 'POST'
     }
-    client.request('DeleteDomainRecord', requestParams, requestOption).then((result) => {
-      res.json(result)
-    }).catch(e => {
-      res.json(e)
-    })
+    client
+      .request('DeleteDomainRecord', requestParams, requestOption)
+      .then(result => {
+        res.json(result)
+      })
+      .catch(e => {
+        res.json(e)
+      })
   })
   server.post('/dns/add', async (req, res) => {
     const { body } = req
-    const { secretId, secertKey, domainName = 'util.online', RR, type = 'A', value } = body || {}
+    const {
+      secretId,
+      secertKey,
+      domainName = 'util.online',
+      RR,
+      type = 'A',
+      value
+    } = body || {}
     var client = Client(secretId, secertKey)
     const requestParams = {
       DomainName: domainName, // util.online
@@ -72,11 +89,14 @@ const addControllers = (server) => {
     var requestOption = {
       method: 'POST'
     }
-    client.request('AddDomainRecord', requestParams, requestOption).then((result) => {
-      res.json(result)
-    }).catch(e => {
-      res.json(e)
-    })
+    client
+      .request('AddDomainRecord', requestParams, requestOption)
+      .then(result => {
+        res.json(result)
+      })
+      .catch(e => {
+        res.json(e)
+      })
   })
 
   server.get('/delay/:times', async (req, res) => {
@@ -85,8 +105,23 @@ const addControllers = (server) => {
     res.json('')
   })
   server.get('/test', async (req, res) => {
-    req.pipe(process.stdout)
-    res.json('')
+    res.send(`
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    this is a
+</body>
+
+</html>
+    `)
   })
 }
 

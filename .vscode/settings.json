@@ -7,5 +7,6 @@
         "typescript"
     ],
     "javascript.validate.enable": false,
-    "standard.usePackageJson": true
+    "standard.usePackageJson": true,
+    "editor.formatOnSave": true
 }
