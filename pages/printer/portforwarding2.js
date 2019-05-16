@@ -47,7 +47,7 @@ class PortForwarding extends React.Component {
       }
     })
     socket.on('common', function (data) {
-      console.log('common:', data.SVGElementInstance(1, 500))
+      console.log('common:', data.slice(1, 500))
     })
     socket.emit('cmd', { type: CMD_GENERATE })
 
@@ -78,13 +78,13 @@ class PortForwarding extends React.Component {
           socket.emit(
             'buffer',
             'HTTP/1.1 ' +
-            status +
-            ' ' +
-            statusText +
-            ' \r\n' +
-            headers +
-            '\r\n' +
-            response
+              status +
+              ' ' +
+              statusText +
+              ' \r\n' +
+              headers +
+              '\r\n' +
+              response
           )
         }
       })
@@ -97,7 +97,7 @@ class PortForwarding extends React.Component {
   _onChange = (type, value) => {
     this.setState({ [type]: value })
   }
-  componentDidMount () { }
+  componentDidMount () {}
   render () {
     return (
       <Layout>
@@ -109,10 +109,7 @@ class PortForwarding extends React.Component {
           onChange={e => this._onChange('localPort', e.target.value)}
         />
         <br />
-        <a
-          href={`http://localhost:${this.state.localPort}`}
-          target='_blank'
-        >
+        <a href={`http://localhost:${this.state.localPort}`} target='_blank'>
           <p>serverPort: {this.state.serverPort}</p>
         </a>
         <button onClick={this._close}>close</button>
