@@ -27,6 +27,10 @@ const Index = (props) => (
     <Link href={`/static/2048/index.html`}>
       <a>2048</a>
     </Link>
+    <br />
+    <Link href={`/static/handwrite/index.html`}>
+      <a>handwrite</a>
+    </Link>
 
 
   </Layout>
