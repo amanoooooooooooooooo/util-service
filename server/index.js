@@ -4,6 +4,7 @@ const next = require('next')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
+const compression = require('compression')
 
 const { addControllers } = require('./controller')
 
@@ -11,6 +12,7 @@ app.prepare()
   .then(() => {
     const server = express()
 
+    server.use(compression())
     server.use(express.json()) // to support JSON-encoded bodies
     server.use(express.urlencoded({ extended: true }))
 

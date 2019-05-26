@@ -3,11 +3,6 @@
             text-align: center;
           	color: #414142;
         	  background: rgb(246,241,232);
-            /*任务一、制作多背景*/
-            background-image: -ms-radial-gradient(farthest-side ellipse at center,  rgba(246,241,232,.85) 39%,rgba(212,204,186,.5) 100%), url("http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg3.jpg");
-            background-image: -webkit-radial-gradient(farthest-side ellipse at center,  rgba(246,241,232,.85) 39%,rgba(212,204,186,.5) 100%), url("http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg3.jpg");
-            background-image: radial-gradient( farthest-side ellipse at center,  rgba(246,241,232,.85) 39%,rgba(212,204,186,.5) 100%), url("http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg3.jpg");
-            /*任务二、控制背景图像尺寸*/
             background-size: cover;
             }
         
