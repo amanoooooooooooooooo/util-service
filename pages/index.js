@@ -21,8 +21,9 @@ const Index = (props) => (
     <Link href={`/printer/portforwarding`}>
       <a>端口转发(Port Forwarding)</a>
     </Link>
+    <br />
 
-    <p>游戏机(Game)</p>
+    <p>作品集(Collection)</p>
     <br />
     <Link href={`/static/2048/index.html`}>
       <a>2048</a>
@@ -34,6 +35,14 @@ const Index = (props) => (
     <br />
     <Link href={`/static/wow/index.html`}>
       <a>wow</a>
+    </Link>
+    <br />
+    <Link href={`/static/countdown/index.html`}>
+      <a>countdown</a>
+    </Link>
+    <br />
+    <Link href={`/static/3dshow/index.html`}>
+      <a>3dshow</a>
     </Link>
 
 
