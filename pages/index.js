@@ -21,6 +21,14 @@ const Index = (props) => (
     <Link href={`/printer/portforwarding`}>
       <a>端口转发(Port Forwarding)</a>
     </Link>
+
+    <p>游戏机(Game)</p>
+    <br />
+    <Link href={`/static/2048/index.html`}>
+      <a>2048</a>
+    </Link>
+
+
   </Layout>
 )
 
