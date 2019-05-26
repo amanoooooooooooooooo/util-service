@@ -39,11 +39,15 @@ const Index = (props) => (
     </Link>
     <br />
     <Link href={`/static/countdown/index.html`}>
-      <a>countdown</a>
+      <a>count down</a>
     </Link>
     <br />
     <Link href={`/static/3dshow/index.html`}>
-      <a>3dshow</a>
+      <a>3d show</a>
+    </Link>
+    <br />
+    <Link href={`/static/bgtranslation/index.html`}>
+      <a>bg translation</a>
     </Link>
 
 
