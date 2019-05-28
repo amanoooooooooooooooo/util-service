@@ -83,6 +83,14 @@ const addControllers = (server) => {
     await delay(parseInt(times))
     res.json('')
   })
+  server.get('/sdk', async (req, res) => {
+    const { name, pass } = req.query
+    res.json({
+      name,
+      pass,
+      date: new Date()
+    })
+  })
 }
 module.exports = {
   addControllers
