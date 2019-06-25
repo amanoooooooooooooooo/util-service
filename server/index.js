@@ -2,29 +2,37 @@ const express = require('express')
 const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const nextApp = next({ dev })
+const handle = nextApp.getRequestHandler()
 const compression = require('compression')
+const WebSocket = require('ws')
 
 const { addControllers } = require('./controller')
 
-app.prepare()
+
+nextApp.prepare()
   .then(() => {
-    const server = express()
+    const app = express()
+    const server = require('http').Server(app)
+    const wss = new WebSocket.Server({ server })
+    wss.on('connection', function connection(ws) {
+      ws.on('message', function incoming(message) {
+        console.debug('received: %s', message)
+        ws.send('ws ondata push:' + message)
+      })
+      ws.send('ws on connection')
+      setInterval(() => {
+        ws.send('ws task push:' + Math.random())
+      }, 3 * 1000);
+    })
 
-    server.use(compression())
-    server.use(express.json()) // to support JSON-encoded bodies
-    server.use(express.urlencoded({ extended: true }))
+    app.use(compression())
+    app.use(express.json()) // to support JSON-encoded bodies
+    app.use(express.urlencoded({ extended: true }))
 
-    addControllers(server)
+    addControllers(app)
 
-    // server.get('/p/:id', (req, res) => {
-    //   const actualPage = '/post'
-    //   const queryParams = { title: req.params.id }
-    //   app.render(req, res, actualPage, queryParams)
-    // })
-
-    server.get('*', (req, res) => {
+    app.get('*', (req, res) => {
       return handle(req, res)
     })
 
