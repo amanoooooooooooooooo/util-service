@@ -5,7 +5,7 @@ const About = () => {
   return (
     <Layout>
       <h3>Pull requests are always welcome</h3>
-      <a target='view_window' href='https://github.com/amanoooooooooooooooo/util-service' >Github</a>
+      <a target='view_window' href='https://github.com/amanoooo/util-service' >Github</a>
       <h3>Maintained by amano</h3>
       <ul>
         <li>Mail: <a href='mailto:1060996790@qq.com' >1060996790@qq.com</a></li>
