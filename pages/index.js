@@ -5,7 +5,6 @@ import Link from 'next/link'
 const Index = (props) => (
   <Layout>
     <p>打印机(Printer)</p>
-    <br />
     <Link href={`/printer/headers`}>
       <a>请求头(Request Header)</a>
     </Link>
@@ -24,8 +23,14 @@ const Index = (props) => (
     <br />
     <br />
 
-    <p>作品集(Collection)</p>
+    <p>爬虫(Spider)</p>
+    <Link href={`/spider/novel`}>
+      <a>小说(novel)</a>
+    </Link>
     <br />
+    <br />
+
+    <p>作品集(Collection)</p>
     <Link href={`/static/2048/index.html`}>
       <a>2048</a>
     </Link>
@@ -49,7 +54,6 @@ const Index = (props) => (
     <Link href={`/static/bgtranslation/index.html`}>
       <a>bg translation</a>
     </Link>
-
 
   </Layout>
 )

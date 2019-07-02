@@ -14,6 +14,7 @@ nextApp.prepare()
   .then(() => {
     const app = express()
     const server = require('http').Server(app)
+
     const wss = new WebSocket.Server({ server })
     wss.on('connection', function connection (ws) {
       ws.on('message', function incoming (message) {
@@ -32,6 +33,22 @@ nextApp.prepare()
 
     commonController.addControllers(app)
     spiderController.addControllers(app)
+
+    app.get('/spider/novel/:id', (req, res) => {
+      const { id } = req.params
+      console.log('id is ', id)
+      const actualPage = '/spider/chapters'
+      const queryParams = { id }
+      nextApp.render(req, res, actualPage, queryParams)
+    })
+
+    app.get('/spider/novel/:id/:chapter', (req, res) => {
+      const { id, chapter } = req.params
+      console.log('id is ', id)
+      const actualPage = '/spider/chapter'
+      const queryParams = { id, chapter }
+      nextApp.render(req, res, actualPage, queryParams)
+    })
 
     app.get('*', (req, res) => {
       return handle(req, res)

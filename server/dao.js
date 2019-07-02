@@ -10,5 +10,11 @@ async function queryNovelRow (id, chapter) {
   return camelcaseKeys(rows)
 }
 
+async function queryNovelChapters (id) {
+  const rows = await pool.queryAsync(`SELECT chapter_index, chapter_title FROM novel WHERE oss_id = ${id} `)
+  return camelcaseKeys(rows)
+}
+
 exports.queryOssRows = queryOssRows
 exports.queryNovelRow = queryNovelRow
+exports.queryNovelChapters = queryNovelChapters
