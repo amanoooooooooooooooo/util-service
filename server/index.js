@@ -9,21 +9,20 @@ const WebSocket = require('ws')
 
 const { addControllers } = require('./controller')
 
-
 nextApp.prepare()
   .then(() => {
     const app = express()
     const server = require('http').Server(app)
     const wss = new WebSocket.Server({ server })
-    wss.on('connection', function connection(ws) {
-      ws.on('message', function incoming(message) {
+    wss.on('connection', function connection (ws) {
+      ws.on('message', function incoming (message) {
         console.debug('received: %s', message)
         ws.send('ws ondata push:' + message)
       })
       ws.send('ws on connection')
       setInterval(() => {
         ws.send('ws task push:' + Math.random())
-      }, 3 * 1000);
+      }, 3 * 1000)
     })
 
     app.use(compression())
