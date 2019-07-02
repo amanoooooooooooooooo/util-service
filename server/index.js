@@ -7,7 +7,8 @@ const handle = nextApp.getRequestHandler()
 const compression = require('compression')
 const WebSocket = require('ws')
 
-const { addControllers } = require('./controller')
+const commonController = require('./controller/common')
+const spiderController = require('./controller/spider')
 
 nextApp.prepare()
   .then(() => {
@@ -29,7 +30,8 @@ nextApp.prepare()
     app.use(express.json()) // to support JSON-encoded bodies
     app.use(express.urlencoded({ extended: true }))
 
-    addControllers(app)
+    commonController.addControllers(app)
+    spiderController.addControllers(app)
 
     app.get('*', (req, res) => {
       return handle(req, res)

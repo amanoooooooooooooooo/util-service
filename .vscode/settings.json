@@ -7,5 +7,6 @@
         "typescript"
     ],
     "javascript.validate.enable": false,
-    "standard.usePackageJson": true
+    "standard.usePackageJson": true,
+    "javascript.suggest.autoImports": true
 }

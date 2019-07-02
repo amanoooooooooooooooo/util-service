@@ -11,7 +11,7 @@ const DB_HOST = process.env.DB_HOST || '39.104.226.149' // '172.16.10.45' || "lo
 const DB_PORT = process.env.DB_PORT || 3306
 
 var pool = mysql.createPool({
-  connectionLimit: 20,
+  connectionLimit: 10,
   host: DB_HOST,
   port: DB_PORT,
   user: DB_USER,

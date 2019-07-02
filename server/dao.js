@@ -3,7 +3,12 @@ const camelcaseKeys = require('camelcase-keys')
 
 async function queryOssRows () {
   const rows = await pool.queryAsync('SELECT * FROM oss ')
-  console.log('row ', camelcaseKeys(rows))
+  return camelcaseKeys(rows)
+}
+async function queryNovelRow (id, chapter) {
+  const rows = await pool.queryAsync(`SELECT * FROM novel WHERE oss_id = ${id} AND chapter_index = ${chapter} `)
+  return camelcaseKeys(rows)
 }
 
-queryOssRows()
+exports.queryOssRows = queryOssRows
+exports.queryNovelRow = queryNovelRow
