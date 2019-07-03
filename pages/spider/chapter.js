@@ -4,19 +4,18 @@ import Layout from '../../components/MyLayout.js'
 import { withRouter } from 'next/router'
 import Link from 'next/link'
 
-
 class Chapter extends React.Component {
     state = {
       chapter: ''
     }
     async componentDidMount () {
       const { router } = this.props
-      const { query: { id, chapter:chapterIndex } } = router
+      const { query: { id, chapter: chapterIndex } } = router
       const res = await fetch(`/spider/api/novel/${id}/${chapterIndex}`).then(res => res.json())
       const { errMsg, payload } = res
-      if(errMsg) return 
+      if (errMsg) return
 
-      const chapter = {...payload, content: payload.content.replace(/\s\s\s\s/g,"\n    ")}
+      const chapter = { ...payload, content: payload.content.replace(/\s\s\s\s/g, '\n    ') }
       this.setState({
         chapter,
         id,
@@ -25,14 +24,17 @@ class Chapter extends React.Component {
     }
 
     render () {
-      const { chapter, id,chapterIndex } = this.state
+      const { chapter, id, chapterIndex } = this.state
 
       return <Layout>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           <h2>{chapter.chapterTitle}</h2>
-          <div className="novel">{chapter.content}</div>
-          <footer className="chapter-action">
-            <Link href={`/spider/novel/${id}/${parseInt(chapterIndex) + 1}`}>
+
+          <div style={{ flex: 2 }}>
+            <div className='chapter-content'>{chapter.content}</div>
+          </div>
+          <footer className='chapter-action'>
+            <Link href={`/spider/novel/${id}/${parseInt(chapterIndex) - 1}`}>
               <a>{'上一章'}</a>
             </Link>
             <Link href={`/spider/novel/${id}`}>

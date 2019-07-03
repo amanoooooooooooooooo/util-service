@@ -7,7 +7,7 @@ import { withRouter } from 'next/router'
 class Chapters extends React.Component {
     state = {
       chapters: [],
-      reverse: true,
+      reverse: true
     }
     async componentDidMount () {
       const { query: { id } } = this.props.router
@@ -32,10 +32,10 @@ class Chapters extends React.Component {
         float: 'right',
         right: '1rem',
         top: '0rem',
-        position: 'absolute',
+        position: 'absolute'
       }
-      const parentStyle= {
-        position: 'relative',
+      const parentStyle = {
+        position: 'relative'
       }
       return <Layout>
         <div style={parentStyle}>

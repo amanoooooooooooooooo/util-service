@@ -1,21 +1,27 @@
 import Header from './Header'
-import NextHead from 'next/head';
+import NextHead from 'next/head'
 
 const layoutStyle = {
   margin: 16,
   padding: 16,
-  border: '1px solid #DDD'
+  border: '1px solid #DDD',
+  height: '100%'
 }
 
 const Layout = (props) => (
   <div style={layoutStyle}>
     <NextHead>
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+      <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1' />
     </NextHead>
     <NextHead>
-      <meta httpEquiv="Content-Type" content="application/xhtml+xml;charset=utf-8"/>
+      <meta httpEquiv='Content-Type' content='application/xhtml+xml;charset=utf-8' />
     </NextHead>
     <style jsx global>{`
+      html,body { 
+        height:100%;
+        margin:0;
+        padding:0;
+      }
       pre {
         white-space: pre-wrap;
         word-wrap: break-word;
@@ -27,14 +33,19 @@ const Layout = (props) => (
       em {
         color: #ffa11a;
       }
-      .novel {
+      .chapter-content {
         white-space: pre-wrap;
+      }
+      .chapter-placeholder {
+        height: 2rem
       }
       .chapter-action {
         display: flex;
         justify-content: space-between;
-        padding-top: 1em;
+        margin-top: -2rem;
+        height: 2rem;
       }
+
     `}</style>
     <Header />
     <hr />

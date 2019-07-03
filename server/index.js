@@ -10,7 +10,7 @@ const WebSocket = require('ws')
 const commonController = require('./controller/common')
 const spiderController = require('./controller/spider')
 
-const morgan = require('morgan') 
+const morgan = require('morgan')
 
 nextApp.prepare()
   .then(() => {
