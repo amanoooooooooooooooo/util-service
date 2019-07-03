@@ -26,7 +26,7 @@ class Chapters extends React.Component {
       return <Layout>
         <div>
           {chapters.map(item => {
-            return <div key={item.id}>
+            return <div key={item.chapterIndex}>
               <Link href={`/spider/novel/${id}/${item.chapterIndex}`}>
                 <a>{item.chapterTitle}</a>
               </Link>

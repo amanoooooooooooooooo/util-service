@@ -20,6 +20,9 @@ const Layout = (props) => (
       em {
         color: #ffa11a;
       }
+      .novel {
+        white-space: pre-wrap;
+      }
     `}</style>
     <Header />
     <hr />
