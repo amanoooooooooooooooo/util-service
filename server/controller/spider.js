@@ -26,6 +26,19 @@ const addControllers = (server) => {
     const chapters = await dao.queryNovelChapters(id)
     res.json(ResultUtil.success(chapters))
   })
+
+  server.post('/spider/api/novel', async (req, res) => {
+    const { body } = req
+    const { name, crawlUrl } = body
+    console.log('name %s, crawlurl %s', name, crawlUrl)
+    const ossRow = {
+      name,
+      type: 'NOVEL',
+      crawl_url: crawlUrl
+    }
+    const result = await dao.insertOss(ossRow)
+    res.json(ResultUtil.success(result))
+  })
 }
 module.exports = {
   addControllers

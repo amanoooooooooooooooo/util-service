@@ -42,7 +42,6 @@ const Layout = (props) => (
       .chapter-action {
         display: flex;
         justify-content: space-between;
-        margin-top: -2rem;
         height: 2rem;
       }
 

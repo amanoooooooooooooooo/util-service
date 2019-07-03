@@ -33,6 +33,7 @@ class Chapter extends React.Component {
           <div style={{ flex: 2 }}>
             <div className='chapter-content'>{chapter.content}</div>
           </div>
+          <p>{`小说来自: ${chapter.crawlUrl} 仅作为学习使用, 侵删`}</p>
           <footer className='chapter-action'>
             <Link href={`/spider/novel/${id}/${parseInt(chapterIndex) - 1}`}>
               <a>{'上一章'}</a>
