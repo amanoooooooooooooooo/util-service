@@ -9,7 +9,6 @@ class Chapters extends React.Component {
       chapters: []
     }
     async componentDidMount () {
-      console.log('a ', this)
       const { query: { id } } = this.props.router
       const res = await fetch(`/spider/api/novel/${id}`).then(res => res.json())
       const { errMsg, payload } = res
@@ -20,8 +19,6 @@ class Chapters extends React.Component {
     render () {
       const { chapters } = this.state
       const { query: { id } } = this.props.router
-
-      console.log('chapters', chapters)
 
       return <Layout>
         <div>

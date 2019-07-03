@@ -23,7 +23,6 @@ class Chapter extends React.Component {
     }
     render () {
       const { chapter } = this.state
-      console.log('chapter', chapter)
 
       return <Layout>
         <div>

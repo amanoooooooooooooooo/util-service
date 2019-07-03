@@ -36,7 +36,6 @@ nextApp.prepare()
 
     app.get('/spider/novel/:id', (req, res) => {
       const { id } = req.params
-      console.log('id is ', id)
       const actualPage = '/spider/chapters'
       const queryParams = { id }
       nextApp.render(req, res, actualPage, queryParams)
@@ -44,7 +43,6 @@ nextApp.prepare()
 
     app.get('/spider/novel/:id/:chapter', (req, res) => {
       const { id, chapter } = req.params
-      console.log('id is ', id)
       const actualPage = '/spider/chapter'
       const queryParams = { id, chapter }
       nextApp.render(req, res, actualPage, queryParams)

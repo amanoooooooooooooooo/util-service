@@ -1,4 +1,5 @@
 import Header from './Header'
+import NextHead from 'next/head';
 
 const layoutStyle = {
   margin: 16,
@@ -8,6 +9,12 @@ const layoutStyle = {
 
 const Layout = (props) => (
   <div style={layoutStyle}>
+    <NextHead>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    </NextHead>
+    <NextHead>
+      <meta httpEquiv="Content-Type" content="application/xhtml+xml;charset=utf-8"/>
+    </NextHead>
     <style jsx global>{`
       pre {
         white-space: pre-wrap;
