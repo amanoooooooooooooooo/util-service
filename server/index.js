@@ -10,6 +10,8 @@ const WebSocket = require('ws')
 const commonController = require('./controller/common')
 const spiderController = require('./controller/spider')
 
+const morgan = require('morgan') 
+
 nextApp.prepare()
   .then(() => {
     const app = express()
@@ -30,6 +32,8 @@ nextApp.prepare()
     app.use(compression())
     app.use(express.json()) // to support JSON-encoded bodies
     app.use(express.urlencoded({ extended: true }))
+
+    app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] - :response-time ms'))
 
     commonController.addControllers(app)
     spiderController.addControllers(app)

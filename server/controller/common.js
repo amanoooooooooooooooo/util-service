@@ -19,7 +19,7 @@ const addControllers = (server) => {
   })
 
   server.get('/utilwebhook', async (req, res) => {
-    const resp = await fetch('http://39.104.226.149:9000/api/webhooks/376fc971-5cdf-4bcb-9a0d-78c9bdd12b1a', {
+    const resp = await fetch('http://util.online:9000/api/webhooks/0f1c7be8-5763-4b8d-8cc1-e23b3fd1befb', {
       method: 'POST'
     }).then((res) => res.text())
     res.json(resp)
