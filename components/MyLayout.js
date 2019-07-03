@@ -30,6 +30,11 @@ const Layout = (props) => (
       .novel {
         white-space: pre-wrap;
       }
+      .chapter-action {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1em;
+      }
     `}</style>
     <Header />
     <hr />
