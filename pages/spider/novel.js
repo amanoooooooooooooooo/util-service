@@ -8,6 +8,9 @@ class Spider extends React.Component {
       novels: [],
       filter: ''
     }
+    crawlUrl= {}
+    name= {}
+
     componentDidMount () {
       this.query()
     }
@@ -22,32 +25,12 @@ class Spider extends React.Component {
       const filter = e.target.value
       this.setState({ filter })
     }
-    add1 = async () => {
-      const name = this.name1.value
+
+    add = async () => {
+      const name = this.name.value
+      const crawlUrl = this.crawlUrl.value
       if (!name) {
-        alert('请输入内容')
-        return
-      }
-      const options = {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({ name })
-      }
-      const { errMsg } = await fetch('/spider/api/novel', options).then(res => res.json())
-      if (!errMsg) {
-        alert('成功')
-        this.query()
-      } else {
-        alert(errMsg)
-      }
-    }
-    add2 = async () => {
-      const name = this.name2.value
-      const crawlUrl = this.crawlUrl2.value
-      if (!name || !crawlUrl) {
-        alert('请输入内容')
+        alert('请输入小说名')
         return
       }
       const options = {
@@ -57,7 +40,8 @@ class Spider extends React.Component {
         },
         body: JSON.stringify({ name, crawlUrl })
       }
-      const { errMsg } = fetch('/spider/api/novel', options).then(res => res.json())
+      const { errMsg } = await fetch('/spider/api/novel', options).then(res => res.json())
+
       if (!errMsg) {
         alert('成功')
         this.query()
@@ -80,7 +64,7 @@ class Spider extends React.Component {
           <Filter filter={this.filter} />
           <hr />
           <h2>添加想爬取的小说</h2>
-          <AddNewNovel _this={this} add1={this.add1} add2={this.add2} />
+          <AddNewNovel _this={this} add={this.add} />
         </div>
       </Layout>
     }
@@ -94,25 +78,18 @@ function Filter (props) {
   }}><input placeholder='增加过滤' onChange={props.filter} /></div>
 }
 function AddNewNovel (props) {
-  const { _this, add1, add2 } = props
+  const { _this, add } = props
   return <div>
     <h3>方法1</h3>
-    <p>使用 https://www.dingdiann.com</p>
-    <p>输入小说名, 点击添加</p>
-    <label htmlFor='add-nove-name1'>{'小说名称: '}</label>
-    <input id='add-nove-name1' placeholder='小说名称' ref={e => { _this.name1 = e }} />
-    <br />
-    <div onClick={add1}>增加</div>
-    <h3>方法2</h3>
-    <p>使用 https://www.qu.la</p>
     <p>输入小说名, 输入小说第一章网址, 点击添加</p>
-    <label htmlFor='add-nove-name2'>{'小说名称: '}</label>
-    <input id='add-nove-name2' placeholder='小说名称' ref={e => { _this.name2 = e }} />
+    <label htmlFor='add-nove-name'>{'小说名称: '}</label>
+    <input id='add-nove-name' placeholder='*小说名称' ref={e => { _this.name = e }} />
     <br />
-    <label htmlFor='add-nove-url2'>{'小说网址: '}</label>
-    <input id='add-nove-url2' placeholder='小说第一章网址' ref={e => { _this.crawlUrl2 = e }} />
+    {/* <label htmlFor='add-nove-url'>{'小说网址: '}</label>
+    <input id='add-nove-url' placeholder='第一章网址' ref={e => { _this.crawlUrl = e }} />
+    <span>(同名小说)</span> */}
     <br />
-    <div onClick={add2}>增加</div>
+    <div onClick={add}>增加</div>
 
   </div>
 }
