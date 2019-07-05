@@ -52,8 +52,13 @@ const addControllers = (server) => {
       type: 'NOVEL',
       crawl_url: crawlUrl
     }
-    const result = await dao.insertOss(ossRow)
-    res.json(ResultUtil.success(result))
+    const rows = await dao.queryOssWithOption(name, crawlUrl)
+    if (rows.length > 0) {
+      res.json(ResultUtil.fail('已存在'))
+    } else {
+      const result = await dao.insertOss(ossRow)
+      res.json(ResultUtil.success(result))
+    }
   })
 }
 module.exports = {

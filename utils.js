@@ -12,8 +12,8 @@ class ResultUtil {
   static success (payload) {
     return ResultUtil.send(null, payload)
   }
-  static fail (payload) {
-    return ResultUtil.send('default error', payload)
+  static fail (errMsg = 'DEFAULT ERROR') {
+    return ResultUtil.send(errMsg)
   }
 }
 
