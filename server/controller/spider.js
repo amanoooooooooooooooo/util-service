@@ -1,6 +1,7 @@
 // var fetch = require('isomorphic-unfetch')
 const dao = require('../dao')
 const { ResultUtil } = require('../../utils')
+const { sendMail } = require('../mail')
 
 const addControllers = (server) => {
   server.get('/spider/api/oss', async (req, res) => {
@@ -25,6 +26,21 @@ const addControllers = (server) => {
     const { id } = req.params
     const chapters = await dao.queryNovelChapters(id)
     res.json(ResultUtil.success(chapters))
+  })
+
+  server.post('/spider/api/mail', async (req, res) => {
+    const { body } = req
+    const { to, subject, text, html } = body
+    if (!to || !subject) {
+      res.json(ResultUtil.fail('参数错误'))
+    }
+    try {
+      const result = await sendMail(to, subject, text, html)
+      res.json(ResultUtil.success(result))
+    } catch (e) {
+      console.error('sendMail error ', e)
+      res.json(ResultUtil.fail('发送失败'))
+    }
   })
 
   server.post('/spider/api/novel', async (req, res) => {
