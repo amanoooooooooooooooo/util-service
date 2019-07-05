@@ -1,16 +1,18 @@
 var nodemailer = require('nodemailer')
 
-const user = process.env.MAIL_USER || 'amanoooooooooooooooo@gmail.com'
+const user = process.env.MAIL_USER || '1060996790@qq.com'
 const pass = process.env.MAIL_PASS || '1'
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.qq.com',
+  secureConnection: true,
+  port: 465,
   auth: { user, pass }
 })
 
 function sendMail (to, subject, text, html) {
   var mailOptions = {
-    from: 'util.online',
+    from: 'util.online<1060996790@qq.com>',
     to,
     subject,
     text,
