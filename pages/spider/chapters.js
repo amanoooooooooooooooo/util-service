@@ -38,13 +38,14 @@ class Chapters extends React.Component {
       const mail = this.mail.value && this.mail.value.trim()
       const { query: { id } } = this.props.router
       console.log('mail ', mail)
-      
+
       if (!mail) {
         alert('请输入邮箱')
         return
       }
-      if (MAIL_PATTERN.test(mail)) {
+      if (!MAIL_PATTERN.test(mail)) {
         alert('邮箱格式不正确')
+        return
       }
 
       const { errMsg } = await Fetch.post('/spider/api/sub', { mail, id })
