@@ -9,6 +9,10 @@ async function queryNovelRow (id, chapter) {
   const rows = await pool.queryAsync(`SELECT * FROM novel WHERE oss_id = ${id} AND chapter_index = ${chapter} `)
   return camelcaseKeys(rows)
 }
+async function queryRssRows (userId, ossId) {
+  const rows = await pool.queryAsync(`SELECT * FROM rss WHERE user_id = ${userId} AND oss_id = ${ossId} `)
+  return camelcaseKeys(rows)
+}
 
 async function queryNovelChapters (id) {
   const rows = await pool.queryAsync(`SELECT chapter_index, chapter_title FROM novel WHERE oss_id = ${id} `)
@@ -44,3 +48,4 @@ exports.queryUserWithOption = queryUserWithOption
 exports.insertOss = insertOss
 exports.insertUser = insertUser
 exports.insertRss = insertRss
+exports.queryRssRows = queryRssRows

@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { withRouter } from 'next/router'
 import Fetch from '../../client/service.js'
 
+const MAIL_PATTERN = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
+
 class Chapters extends React.Component {
     state = {
       chapters: [],
@@ -35,11 +37,16 @@ class Chapters extends React.Component {
     subscribe = async () => {
       const mail = this.mail.value && this.mail.value.trim()
       const { query: { id } } = this.props.router
+      console.log('mail ', mail)
+      
       if (!mail) {
         alert('请输入邮箱')
         return
       }
-      console.log('mail ', mail)
+      if (MAIL_PATTERN.test(mail)) {
+        alert('邮箱格式不正确')
+      }
+
       const { errMsg } = await Fetch.post('/spider/api/sub', { mail, id })
       if (errMsg) {
         alert(errMsg)

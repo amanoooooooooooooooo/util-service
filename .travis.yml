@@ -15,5 +15,5 @@ script:
 - docker build -t amanohikaru/util-service .
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - docker push amanohikaru/util-service
-# - curl -X POST http://util.online:9000/api/webhooks/d24ebc41-4952-4d21-bae2-9eb124339b7a
+- curl -X POST http://util.online:9000/api/webhooks/0f1c7be8-5763-4b8d-8cc1-e23b3fd1befb
 

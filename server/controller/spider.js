@@ -93,10 +93,14 @@ const addControllers = (server) => {
         user_id: userId,
         oss_id: ossId
       }
-      await dao.insertRss(conn, rssRow)
-      await conn.commitAsync()
-
-      res.json(ResultUtil.success())
+      const rssResults = await dao.queryRssRows(userId, ossId)
+      if (rssResults.length > 0) {
+        res.json(ResultUtil.fail('已订阅'))
+      } else {
+        await dao.insertRss(conn, rssRow)
+        await conn.commitAsync()
+        res.json(ResultUtil.success())
+      }
     } catch (e) {
       console.error('spider/api/sub e', e)
       await conn.rollbackAsync()
