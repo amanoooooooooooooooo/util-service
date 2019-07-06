@@ -18,14 +18,29 @@ async function insertOss (oss) {
   const result = await pool.queryAsync(`INSERT INTO oss SET ?  `, [oss])
   return result
 }
+async function insertUser (conn, user) {
+  const result = await conn.queryAsync(`INSERT INTO user SET ?  `, [user])
+  return result
+}
+async function insertRss (conn, rss) {
+  const result = await conn.queryAsync(`INSERT INTO rss SET ?  `, [rss])
+  return result
+}
 async function queryOssWithOption (name, crawlUrl) {
   const suffix = crawlUrl ? ' AND crawl_url = "' + crawlUrl + '" ' : ''
   const rows = await pool.queryAsync(`SELECT * FROM oss where name = ? ${suffix}`, [name])
+  return camelcaseKeys(rows)
+}
+async function queryUserWithOption (conn, mail) {
+  const rows = await conn.queryAsync(`SELECT * FROM user where mail = ? `, [mail])
   return camelcaseKeys(rows)
 }
 
 exports.queryOssRows = queryOssRows
 exports.queryNovelRow = queryNovelRow
 exports.queryNovelChapters = queryNovelChapters
-exports.insertOss = insertOss
 exports.queryOssWithOption = queryOssWithOption
+exports.queryUserWithOption = queryUserWithOption
+exports.insertOss = insertOss
+exports.insertUser = insertUser
+exports.insertRss = insertRss

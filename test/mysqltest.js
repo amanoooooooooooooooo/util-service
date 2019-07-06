@@ -1,12 +1,14 @@
 var mysql = require('promise-mysql')
 
 mysql.createConnection({
-  host: 'localhost',
-  user: 'admin',
-  password: 'admin',
-  database: 'yellow_page'
+  host: '39.104.226.149',
+  user: 'root',
+  password: 'root',
+  database: 'spider'
 }).then(function (conn) {
   // do stuff with conn
   console.log('conn success')
-  conn.end()
+  conn.query('insert into user set ?', [{ nick: 12 }], function name (e, r) {
+    console.log('e ', e, r)
+  })
 })

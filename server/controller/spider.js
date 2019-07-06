@@ -2,6 +2,7 @@
 const dao = require('../dao')
 const { ResultUtil } = require('../../utils')
 const { sendMail } = require('../mail')
+const { pool } = require('../mysql')
 
 const addControllers = (server) => {
   server.get('/spider/api/oss', async (req, res) => {
@@ -58,6 +59,50 @@ const addControllers = (server) => {
     } else {
       const result = await dao.insertOss(ossRow)
       res.json(ResultUtil.success(result))
+    }
+  })
+
+  server.post('/spider/api/sub', async (req, res) => {
+    const { body } = req
+    const { mail, nick, id: ossId } = body
+    const userRow = {
+      mail,
+      nick
+    }
+
+    console.log('userRow', userRow)
+
+    const conn = await pool.getConnectionAsync()
+    // console.log('got conn %o', conn)
+    await conn.beginTransactionAsync()
+
+    try {
+      const rows = await dao.queryUserWithOption(conn, mail)
+      let userId = -1
+      if (rows.length === 0) {
+        const res = await dao.insertUser(conn, userRow)
+        console.log('insertUser is ', res)
+        userId = res.insertId
+      } else {
+        userId = rows[0].id
+      }
+      console.log('userId ', userId)
+      console.log('ossId ', userId)
+
+      const rssRow = {
+        user_id: userId,
+        oss_id: ossId
+      }
+      await dao.insertRss(conn, rssRow)
+      await conn.commitAsync()
+
+      res.json(ResultUtil.success())
+    } catch (e) {
+      console.error('spider/api/sub e', e)
+      await conn.rollbackAsync()
+      res.json(ResultUtil.fail(e))
+    } finally {
+      conn.release()
     }
   })
 }

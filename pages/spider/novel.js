@@ -2,6 +2,7 @@ import React from 'react'
 import fetch from 'isomorphic-unfetch'
 import Layout from '../../components/MyLayout.js'
 import Link from 'next/link'
+import Fetch from '../../client/service.js'
 
 class Spider extends React.Component {
     state = {
@@ -33,14 +34,7 @@ class Spider extends React.Component {
         alert('请输入小说名')
         return
       }
-      const options = {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({ name, crawlUrl })
-      }
-      const { errMsg } = await fetch('/spider/api/novel', options).then(res => res.json())
+      const { errMsg } = await Fetch.post('/spider/api/novel', { name, crawlUrl })
 
       if (!errMsg) {
         alert('成功')
