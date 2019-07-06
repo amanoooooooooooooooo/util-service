@@ -1,0 +1,19 @@
+language: node_js
+
+
+node_js:
+- "11"
+
+services:
+- docker
+
+# before_install:                                                                 
+# -
+
+script:
+- pwd
+- docker build -f go/Dockerfile -t amanohikaru/util-service .
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- docker push amanohikaru/util-service
+# - curl -X POST http://util.online:9000/api/webhooks/d24ebc41-4952-4d21-bae2-9eb124339b7a
+
