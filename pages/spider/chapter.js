@@ -26,6 +26,8 @@ class Chapter extends React.Component {
     render () {
       const { chapter, id, chapterIndex } = this.state
 
+      const pre = chapter.chapterIndex === 1 ? `/spider/novel/${id}` : `/spider/novel/${id}/${parseInt(chapterIndex) - 1}`
+      const next = chapter.nextCrawlUrl === '' ? `/spider/novel/${id}` : `/spider/novel/${id}/${parseInt(chapterIndex) + 1}`
       return <Layout>
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           <h2>{chapter.chapterTitle}</h2>
@@ -35,13 +37,13 @@ class Chapter extends React.Component {
           </div>
           <p>{`小说来自: ${chapter.crawlUrl} 仅作为学习使用, 侵删`}</p>
           <footer className='chapter-action'>
-            <Link href={`/spider/novel/${id}/${parseInt(chapterIndex) - 1}`}>
+            <Link href={pre}>
               <a>{'上一章'}</a>
             </Link>
             <Link href={`/spider/novel/${id}`}>
               <a>{'目录'}</a>
             </Link>
-            <Link href={`/spider/novel/${id}/${parseInt(chapterIndex) + 1}`}>
+            <Link href={next}>
               <a>{'下一章'}</a>
             </Link>
           </footer>

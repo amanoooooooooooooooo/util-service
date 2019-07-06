@@ -75,7 +75,7 @@ function AddNewNovel (props) {
   const { _this, add } = props
   return <div>
     <h3>方法1</h3>
-    <p>输入小说名, 输入小说第一章网址, 点击添加</p>
+    <p>输入小说名, 点击添加</p>
     <label htmlFor='add-nove-name'>{'小说名称: '}</label>
     <input id='add-nove-name' placeholder='*小说名称' ref={e => { _this.name = e }} />
     <br />

@@ -63,6 +63,7 @@ class Chapters extends React.Component {
 
       return <Layout>
         <div style={styles.parentStyle}>
+          {_chapters.length === 0 && <div>还没有找到章节</div>}
           {_chapters.map(item => {
             return <div key={item.chapterIndex}>
               <Link href={`/spider/novel/${id}/${item.chapterIndex}`}>
