@@ -9,7 +9,7 @@ const About = () => {
       <h3>Maintained by amano</h3>
       <ul>
         <li>Mail: <a href='mailto:1060996790@qq.com' >1060996790@qq.com</a></li>
-        <li>Blog: <a target='_blank' href='https://fe2o3.club'>https://fe2o3.club</a></li>
+        <li>Blog: <a target='_blank' href='https://amano.util.online/'>https://amano.util.online/</a></li>
       </ul>
     </Layout>
   )

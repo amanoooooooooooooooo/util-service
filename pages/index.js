@@ -46,10 +46,10 @@ const Index = (props) => (
     <Link href={`/static/countdown/index.html`}>
       <a>count down</a>
     </Link>
-    <br />
+    {/* <br />
     <Link href={`/static/3dshow/index.html`}>
       <a>3d show</a>
-    </Link>
+    </Link> */}
     <br />
     <Link href={`/static/bgtranslation/index.html`}>
       <a>bg translation</a>

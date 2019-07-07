@@ -39,6 +39,9 @@ async function queryUserWithOption (conn, mail) {
   const rows = await conn.queryAsync(`SELECT * FROM user where mail = ? `, [mail])
   return camelcaseKeys(rows)
 }
+async function updateUser (user, id) {
+  return pool.queryAsync(`UPDATE user SET ? WHERE id = ?`, [user, id])
+}
 
 exports.queryOssRows = queryOssRows
 exports.queryNovelRow = queryNovelRow
@@ -49,3 +52,4 @@ exports.insertOss = insertOss
 exports.insertUser = insertUser
 exports.insertRss = insertRss
 exports.queryRssRows = queryRssRows
+exports.updateUser = updateUser

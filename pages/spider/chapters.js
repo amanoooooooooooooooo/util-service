@@ -4,6 +4,7 @@ import Layout from '../../components/MyLayout.js'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import Fetch from '../../client/service.js'
+import { MAKR_LOGIN } from '../../client/constant'
 
 const MAIL_PATTERN = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
 
@@ -21,6 +22,19 @@ class Chapters extends React.Component {
       !errMsg && this.setState({
         chapters: payload.reverse()
       })
+      this._updateMail()
+    }
+    _updateMail () {
+      try {
+        const userString = localStorage.getItem(MAKR_LOGIN)
+        const user = JSON.parse(userString) || {}
+        const { mail } = user
+        if (this.mail && mail) {
+          this.mail.value = mail
+        }
+      } catch (error) {
+        console.error('chapters e', error)
+      }
     }
 
     _reverse = () => {
@@ -53,8 +67,10 @@ class Chapters extends React.Component {
         alert(errMsg)
       } else {
         alert('成功')
+        localStorage.setItem(MAKR_LOGIN, JSON.stringify({ mail }))
       }
     }
+
     render () {
       const { chapters, reverse, show } = this.state
       const { query: { id } } = this.props.router

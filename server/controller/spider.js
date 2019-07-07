@@ -4,6 +4,14 @@ const { ResultUtil } = require('../../utils')
 const { sendMail } = require('../mail')
 const { pool } = require('../mysql')
 
+const crypto = require('crypto')
+
+function md5 (string) {
+  const hash = crypto.createHash('md5')
+  hash.update(string)
+  return hash.digest('hex')
+}
+
 const addControllers = (server) => {
   server.get('/spider/api/oss', async (req, res) => {
     const ossRows = await dao.queryOssRows()
@@ -108,6 +116,36 @@ const addControllers = (server) => {
     } finally {
       conn.release()
     }
+  })
+
+  server.put('/spider/api/user', async (req, res) => {
+    const { body } = req
+    const { mail, nick, pass } = body
+    console.log('body2 ', body)
+    if (!mail || !mail.trim()) {
+      res.json(ResultUtil.fail('请输入邮箱'))
+    } else if (!nick || !nick.trim()) {
+      res.json(ResultUtil.fail('请输入昵称'))
+    } else if (!pass || !pass.trim()) {
+      res.json(ResultUtil.fail('请输入密码'))
+    } else {
+      const userRows = await dao.queryUserWithOption(pool, mail)
+      if (userRows.length === 0) {
+        const result = await dao.insertUser(pool, { nick, mail, pass: md5(pass) })
+        console.log('result ', result)
+        res.json(ResultUtil.success({ id: result.insertId, mail, nick }))
+      } else {
+        const result = await dao.updateUser({ nick, pass: md5(pass) }, userRows[0].id)
+        console.log('result ', result)
+
+        res.json(ResultUtil.success({ id: userRows[0].id, mail, nick }))
+      }
+    }
+  })
+  server.get('/spider/api/user/:id', async (req, res) => {
+    const { id } = req.params
+    console.log('id ', id)
+    res.json(ResultUtil.success({ id }))
   })
 }
 module.exports = {
