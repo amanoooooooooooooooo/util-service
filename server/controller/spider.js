@@ -1,6 +1,6 @@
 // var fetch = require('isomorphic-unfetch')
 const dao = require('../dao')
-const { ResultUtil } = require('../../utils')
+const { ResultUtil } = require('../utils')
 const { sendMail } = require('../mail')
 const { pool } = require('../mysql')
 
@@ -202,7 +202,10 @@ const addControllers = (server) => {
   server.get('/spider/api/user/:id', async (req, res) => {
     const { id } = req.params
     console.log('id ', id)
-    res.json(ResultUtil.success({ id }))
+    const results = await dao.queryOssInRss(id)
+    console.log('queryOssInRss  results', results)
+
+    res.json(ResultUtil.success(results))
   })
 }
 module.exports = {

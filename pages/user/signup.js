@@ -6,7 +6,6 @@ import { withRouter } from 'next/router'
 
 function Signup (props) {
   const [user, setUser] = useState({})
-  console.log('props', props)
 
   const updateValue = (e, type) => {
     const newUser = {
@@ -19,7 +18,6 @@ function Signup (props) {
     const { nick, pass, mail } = user
 
     const res = await FetchApi.post('/spider/api/user', { nick, pass, mail })
-    console.log('res ', res)
     const { errMsg, payload } = res
     if (errMsg) {
       alert(errMsg)

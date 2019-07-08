@@ -10,7 +10,6 @@ function Login (props) {
   }
 
   const [user, setUser] = useState({})
-  console.log('props', props)
 
   const updateValue = (e, type) => {
     const newUser = {
@@ -23,7 +22,6 @@ function Login (props) {
     const { nick, pass, mail } = user
 
     const res = await FetchApi.post('/spider/api/user/version', { nick, pass, mail })
-    console.log('res ', res)
     const { errMsg, payload } = res
     if (errMsg) {
       alert(errMsg)

@@ -42,6 +42,10 @@ async function queryUserWithOption (conn, mail) {
 async function updateUser (user, id) {
   return pool.queryAsync(`UPDATE user SET ? WHERE id = ?`, [user, id])
 }
+async function queryOssInRss (userId) {
+  const rows = await pool.queryAsync(`SELECT * FROM rss LEFT JOIN oss ON rss.oss_id = oss.id WHERE  user_id = ?`, [userId])
+  return camelcaseKeys(rows)
+}
 
 exports.queryOssRows = queryOssRows
 exports.queryNovelRow = queryNovelRow
@@ -53,3 +57,4 @@ exports.insertUser = insertUser
 exports.insertRss = insertRss
 exports.queryRssRows = queryRssRows
 exports.updateUser = updateUser
+exports.queryOssInRss = queryOssInRss

@@ -8,7 +8,7 @@ const linkStyle = {
 
 const Header = () => {
   const { mail } = getUserStorage()
-  const userHref = mail ? '/user/info' : '/user/signup'
+  const userHref = mail ? '/user/info' : '/user/login'
   return (
     <div>
       <Link href='/'>

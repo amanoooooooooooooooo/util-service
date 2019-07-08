@@ -4,12 +4,11 @@ import { getUserStorage, setUserStorage } from '../../client/util'
 import FetchApi from '../../client/service.js'
 import fetch from 'isomorphic-unfetch'
 import { withRouter } from 'next/router'
+import Link from 'next/link'
 
 function Info (props) {
   const [user, setUser] = useState(getUserStorage())
-  // const userCache = getUserStorage()
-
-  console.log('newUser', user)
+  const [rss, updateRss] = useState([])
 
   const updateValue = (e, type) => {
     const newUser = {
@@ -45,8 +44,13 @@ function Info (props) {
 
       try {
         (async function fetchUser () {
-          const { errMsg, payload: userInfo } = await fetch(`/spider/api/user/${userId}`).then(res => res.json)
+          const { errMsg, payload: userInfo } = await fetch(`/spider/api/user/${userId}`).then(res => res.json())
           console.log('userifno1 ', userInfo)
+          if (errMsg) {
+            console.error('fetchUser errMsg ', errMsg)
+          } else {
+            updateRss(userInfo)
+          }
         })()
       } catch (error) {
         console.error('fetch user e', error)
@@ -74,6 +78,17 @@ function Info (props) {
         <div onClick={_apply}>应用</div>
         <div onClick={_logout}>登出</div>
       </div>
+
+      <hr />
+      <h3>订阅信息</h3>
+
+      {rss.map(item => {
+        return <div key={item.id} >
+          <Link href={`/spider/novel/${item.ossId}`}>
+            <a>{item.name}</a>
+          </Link>
+        </div>
+      })}
 
     </Layout>
   )
