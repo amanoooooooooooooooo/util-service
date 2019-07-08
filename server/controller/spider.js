@@ -6,6 +6,8 @@ const { pool } = require('../mysql')
 
 const crypto = require('crypto')
 
+const MAIL_PATTERN = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
+
 function md5 (string) {
   const hash = crypto.createHash('md5')
   hash.update(string)
@@ -128,6 +130,41 @@ const addControllers = (server) => {
       res.json(ResultUtil.fail('请输入昵称'))
     } else if (!pass || !pass.trim()) {
       res.json(ResultUtil.fail('请输入密码'))
+    } else if (!MAIL_PATTERN.test(mail)) {
+      res.json(ResultUtil.fail('邮箱格式不正确'))
+    } else {
+      const userRows = await dao.queryUserWithOption(pool, mail)
+      const userRow = userRows[0]
+      if (userRows.length === 0) {
+        const result = await dao.insertUser(pool, { nick, mail, pass: md5(pass) })
+        console.log('result ', result)
+        res.json(ResultUtil.success({ id: result.insertId, mail, nick }))
+      } else {
+        if (!userRow.pass) {
+          await dao.updateUser({ nick, pass: md5(pass) }, userRow.id)
+          res.json(ResultUtil.success({ id: userRow.id, mail, nick }))
+        } else {
+          if (md5(pass) === userRow.pass) {
+            await dao.updateUser({ nick }, userRow.id)
+            res.json(ResultUtil.success({ id: userRow.id, mail, nick }))
+          } else {
+            res.json(ResultUtil.fail('密码不一致'))
+          }
+        }
+      }
+    }
+  })
+  server.post('/spider/api/user', async (req, res) => {
+    const { body } = req
+    const { mail, nick, pass } = body
+    if (!mail || !mail.trim()) {
+      res.json(ResultUtil.fail('请输入邮箱'))
+    } else if (!nick || !nick.trim()) {
+      res.json(ResultUtil.fail('请输入昵称'))
+    } else if (!pass || !pass.trim()) {
+      res.json(ResultUtil.fail('请输入密码'))
+    } else if (!MAIL_PATTERN.test(mail)) {
+      res.json(ResultUtil.fail('邮箱格式不正确'))
     } else {
       const userRows = await dao.queryUserWithOption(pool, mail)
       if (userRows.length === 0) {
@@ -135,10 +172,30 @@ const addControllers = (server) => {
         console.log('result ', result)
         res.json(ResultUtil.success({ id: result.insertId, mail, nick }))
       } else {
-        const result = await dao.updateUser({ nick, pass: md5(pass) }, userRows[0].id)
-        console.log('result ', result)
-
-        res.json(ResultUtil.success({ id: userRows[0].id, mail, nick }))
+        res.json(ResultUtil.fail('已存在'))
+      }
+    }
+  })
+  server.post('/spider/api/user/version', async (req, res) => {
+    const { body } = req
+    const { mail, pass } = body
+    if (!mail || !mail.trim()) {
+      res.json(ResultUtil.fail('请输入邮箱'))
+    } else if (!pass || !pass.trim()) {
+      res.json(ResultUtil.fail('请输入密码'))
+    } else if (!MAIL_PATTERN.test(mail)) {
+      res.json(ResultUtil.fail('邮箱格式不正确'))
+    } else {
+      const userRows = await dao.queryUserWithOption(pool, mail)
+      if (userRows.length === 0) {
+        res.json(ResultUtil.fail('用户不存在'))
+      } else {
+        const userRow = userRows[0]
+        if (md5(pass) === userRow.pass) {
+          res.json(ResultUtil.success({ id: userRow.id, mail, nick: userRow.nick }))
+        } else {
+          res.json(ResultUtil.fail('密码不一致'))
+        }
       }
     }
   })

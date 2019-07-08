@@ -1,29 +1,27 @@
 import Layout from '../../components/MyLayout.js'
 import React, { useState, useEffect } from 'react'
 import { getUserStorage, setUserStorage } from '../../client/util'
-// import Fetch from '../../client/service.js'
+import FetchApi from '../../client/service.js'
 import fetch from 'isomorphic-unfetch'
+import { withRouter } from 'next/router'
 
-function Info () {
-  const userStorage = getUserStorage()
-  const [user, setUser] = useState(userStorage)
+function Info (props) {
+  const [user, setUser] = useState(getUserStorage())
   // const userCache = getUserStorage()
-  const _this = {}
 
-  const updatePass = (e) => {
+  console.log('newUser', user)
+
+  const updateValue = (e, type) => {
     const newUser = {
       ...user,
-      mail: e.target.value
+      [type]: e.target.value
     }
-
     setUser(newUser)
   }
   const _apply = async () => {
-    const nick = _this.nick.value
-    const pass = _this.pass.value
-    const mail = _this.mail.value
+    const { nick, pass, mail, id } = user
 
-    const res = await Fetch.put('/spider/api/user', { nick, pass, mail })
+    const res = await FetchApi.put('/spider/api/user', { nick, pass, mail })
     console.log('res ', res)
     const { errMsg, payload } = res
     if (errMsg) {
@@ -35,18 +33,20 @@ function Info () {
   }
 
   const _logout = async () => {
-
+    setUserStorage({})
+    setUser(getUserStorage())
+    props.router.push('/user/login')
   }
 
   useEffect(() => {
-    const userId = userStorage.id
-    if (userStorage.id) {
+    const userId = user.id
+    if (userId) {
       console.log('userId', userId)
-      
+
       try {
         (async function fetchUser () {
           const { errMsg, payload: userInfo } = await fetch(`/spider/api/user/${userId}`).then(res => res.json)
-          console.log('userifno ', userInfo)
+          console.log('userifno1 ', userInfo)
         })()
       } catch (error) {
         console.error('fetch user e', error)
@@ -59,21 +59,24 @@ function Info () {
     <Layout>
       <h3>用户信息</h3>
 
-      {!user.nick && user.mail && <div>已根据邮箱为您自动登陆</div> }
+      {!user.id && user.mail && <div>已根据邮箱为您自动登陆</div> }
       {<br />}
 
-      <label htmlFor='unick'>昵称: </label><input id='unick' ref={e => { _this.nick = e }} /><br />
-      <label htmlFor='upass'>密码: </label><input id='upass' ref={e => { _this.pass = e }} /><br />
-      <label htmlFor='umail'>邮箱: </label><input id='umail' ref={e => { _this.mail = e }} disabled value={user.mail} onChange={updatePass} /><br />
+      <label htmlFor='unick'>昵称: </label><input id='unick' value={user.nick || ''} onChange={(e) => updateValue(e, 'nick')} />
+      <br />
+      <label htmlFor='upass'>密码: </label><input id='upass' value={user.pass || ''} onChange={(e) => updateValue(e, 'pass')} type='password' />
+      <label> 暂不支持修改, 请谨慎</label>
+      <br />
+      <label htmlFor='umail'>邮箱: </label><input id='umail' disabled value={user.mail || ''} onChange={(e) => updateValue(e, 'mail')} /><br />
       <br />
 
       <div className='chapter-action'>
         <div onClick={_apply}>应用</div>
-        <div onClick={_logout}>重制</div>
+        <div onClick={_logout}>登出</div>
       </div>
 
     </Layout>
   )
 }
 
-export default Info
+export default withRouter(Info)
