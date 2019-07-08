@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch'
 
 export default class Fetch {
   static get (url, option) {
-    return fetch.get(url).then(res => res.json)
+    return fetch(url).then(res => res.json())
   }
   static post (url, body) {
     const options = {

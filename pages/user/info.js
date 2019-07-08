@@ -1,8 +1,7 @@
 import Layout from '../../components/MyLayout.js'
 import React, { useState, useEffect } from 'react'
 import { getUserStorage, setUserStorage } from '../../client/util'
-import FetchApi from '../../client/service.js'
-import fetch from 'isomorphic-unfetch'
+import Fetch from '../../client/service.js'
 import { withRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -44,7 +43,7 @@ function Info (props) {
 
       try {
         (async function fetchUser () {
-          const { errMsg, payload: userInfo } = await fetch(`/spider/api/user/${userId}`).then(res => res.json())
+          const { errMsg, payload: userInfo } = await Fetch.get(`/spider/api/user/${userId}`)
           console.log('userifno1 ', userInfo)
           if (errMsg) {
             console.error('fetchUser errMsg ', errMsg)
