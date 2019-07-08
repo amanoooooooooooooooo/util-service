@@ -4,7 +4,7 @@ export function getUserStorage () {
   const userString = (typeof localStorage !== 'undefined') && localStorage.getItem(MAKR_LOGIN)
   let user = {}
   try {
-    user = JSON.parse(userString)
+    user = JSON.parse(userString) || {}
   } catch (error) {
     console.error('getUserStorage e', error)
   }
