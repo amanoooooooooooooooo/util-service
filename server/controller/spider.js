@@ -27,6 +27,8 @@ const addControllers = (server) => {
         res.json(ResultUtil.fail('NOT EXIST'))
         break
       case 1:
+        const novelObj = novelRows[0]
+        novelObj.content = novelObj.content.toString()
         res.json(ResultUtil.success(novelRows[0]))
         break
       default:
