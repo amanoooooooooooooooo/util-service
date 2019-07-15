@@ -4,7 +4,8 @@ import Layout from '../../components/MyLayout.js'
 class PortForwarding extends React.Component {
   render () {
     return <Layout>
-      <h2>Expose Local Service To The Public</h2>
+      <h2>Expose Local Service To The Public(Deprecated)</h2>
+      <h1>!! NOT MAINTAINED !! USE SSH PORT FORWARDING</h1>
       <h3>Scenes</h3>
       <ul>
         <li><a href='./dns'>Free Domain</a></li>

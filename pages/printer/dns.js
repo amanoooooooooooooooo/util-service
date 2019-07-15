@@ -26,7 +26,7 @@ class Dns extends React.Component {
         .then(res => {
           const { DomainRecords: { Record } = [] } = res
           this.setState({
-            domainList: Object.values(Record).filter(item => item.Type === 'A')
+            domainList: Object.values(Record).filter(item => item.Type === 'A' || item.Type === 'CNAME')
           })
         })
     }
