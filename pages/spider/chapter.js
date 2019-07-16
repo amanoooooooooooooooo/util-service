@@ -1,8 +1,8 @@
 import React from 'react'
-import fetch from 'isomorphic-unfetch'
 import Layout from '../../components/MyLayout.js'
 import { withRouter } from 'next/router'
 import Link from 'next/link'
+import Fetch from '../../client/service.js'
 
 class Chapter extends React.Component {
     state = {
@@ -11,7 +11,7 @@ class Chapter extends React.Component {
     async componentDidMount () {
       const { router } = this.props
       const { query: { id, chapter: chapterIndex } } = router
-      const res = await fetch(`/spider/api/novel/${id}/${chapterIndex}`).then(res => res.json())
+      const res = await Fetch.get(`/spider/api/novel/${id}/${chapterIndex}`)
       const { errMsg, payload } = res
       if (errMsg) return
 

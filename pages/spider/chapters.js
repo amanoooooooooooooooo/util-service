@@ -1,5 +1,4 @@
 import React from 'react'
-import fetch from 'isomorphic-unfetch'
 import Layout from '../../components/MyLayout.js'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
@@ -17,7 +16,7 @@ class Chapters extends React.Component {
     mail ={}
     async componentDidMount () {
       const { query: { id } } = this.props.router
-      const res = await fetch(`/spider/api/novel/${id}`).then(res => res.json())
+      const res = await Fetch.get(`/spider/api/novel/${id}`)
       const { errMsg, payload } = res
       !errMsg && this.setState({
         chapters: payload.reverse()

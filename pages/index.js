@@ -28,6 +28,10 @@ const Index = (props) => (
       <a>小说(novel)</a>
     </Link>
     <br />
+    <Link href={`/spider/photo`}>
+      <a>图片(photo)</a>
+    </Link>
+    <br />
     <br />
 
     <p>作品集(Collection)</p>

@@ -209,6 +209,20 @@ const addControllers = (server) => {
 
     res.json(ResultUtil.success(results))
   })
+
+  server.get('/spider/api/photo/:type', async (req, res) => {
+    const { type } = req.params
+    const results = await dao.queryOssRows(type)
+
+    res.json(ResultUtil.success(results))
+  })
+
+  server.get('/spider/api/photo/:type/:id', async (req, res) => {
+    const { id } = req.params
+    const results = await dao.queryPhotoRows(id)
+
+    res.json(ResultUtil.success(results))
+  })
 }
 module.exports = {
   addControllers

@@ -52,6 +52,21 @@ nextApp.prepare()
       nextApp.render(req, res, actualPage, queryParams)
     })
 
+    app.get('/spider/photo/:type', (req, res) => {
+      const { type } = req.params
+      const actualPage = '/spider/gallerys'
+      const queryParams = { type }
+      nextApp.render(req, res, actualPage, queryParams)
+    })
+
+    app.get('/spider/photo/:type/:id', (req, res) => {
+      const { id, type } = req.params
+      console.log('id , type', id, type)
+      const actualPage = '/spider/gallery'
+      const queryParams = { id, type }
+      nextApp.render(req, res, actualPage, queryParams)
+    })
+
     app.get('*', (req, res) => {
       return handle(req, res)
     })

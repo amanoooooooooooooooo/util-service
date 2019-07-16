@@ -1,8 +1,8 @@
 const { pool } = require('./mysql')
 const camelcaseKeys = require('camelcase-keys')
 
-async function queryOssRows () {
-  const rows = await pool.queryAsync('SELECT * FROM oss ')
+async function queryOssRows (type = 'NOVEL') {
+  const rows = await pool.queryAsync('SELECT * FROM oss WHERE `type` = ? ', [type])
   return camelcaseKeys(rows)
 }
 async function queryNovelRow (id, chapter) {
@@ -46,6 +46,10 @@ async function queryOssInRss (userId) {
   const rows = await pool.queryAsync(`SELECT * FROM rss LEFT JOIN oss ON rss.oss_id = oss.id WHERE  user_id = ?`, [userId])
   return camelcaseKeys(rows)
 }
+async function queryPhotoRows (ossId) {
+  const rows = await pool.queryAsync('SELECT * FROM photo WHERE oss_id = ? ', [ossId])
+  return camelcaseKeys(rows)
+}
 
 exports.queryOssRows = queryOssRows
 exports.queryNovelRow = queryNovelRow
@@ -58,3 +62,4 @@ exports.insertRss = insertRss
 exports.queryRssRows = queryRssRows
 exports.updateUser = updateUser
 exports.queryOssInRss = queryOssInRss
+exports.queryPhotoRows = queryPhotoRows
