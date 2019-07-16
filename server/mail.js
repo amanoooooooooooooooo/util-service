@@ -12,7 +12,7 @@ var transporter = nodemailer.createTransport({
 
 function sendMail (to, subject, text, html) {
   var mailOptions = {
-    from: 'util.online<1060996790@qq.com>',
+    from: `util.online<${user}>`,
     to,
     subject,
     text,
