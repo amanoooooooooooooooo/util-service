@@ -1,4 +1,6 @@
-// var fetch = require('isomorphic-unfetch')
+var fetch = require('isomorphic-unfetch')
+var request = require('request')
+
 const dao = require('../dao')
 const { ResultUtil } = require('../utils')
 const { sendMail } = require('../mail')
@@ -222,6 +224,13 @@ const addControllers = (server) => {
     const results = await dao.queryPhotoRows(id)
 
     res.json(ResultUtil.success(results))
+  })
+  server.get('/relay', async (req, res) => {
+    const { url } = req.query
+    console.log('relay url', url)
+    var reply = request('http://util.online:8888/u=3427447752,1627570545&fm=26&gp=0.jpg')
+    // req.pipe(reply)
+    reply.pipe(res)
   })
 }
 module.exports = {
