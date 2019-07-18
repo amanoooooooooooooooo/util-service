@@ -11,7 +11,7 @@ class Gallery extends React.Component {
     }
     async componentDidMount () {
       const { query: { id, type } } = this.props.router
-      console.log('Gallery id %d type %s', id, type)
+      console.log('Gallery id %s type %s', id, type)
       const res = await Fetch.get(`/spider/api/photo/${PhotoTypes[type].type}/${id}`)
       const { errMsg, payload } = res
       !errMsg && this.setState({
@@ -25,9 +25,9 @@ class Gallery extends React.Component {
       return <Layout>
         <div >
           {gallery.map(item => {
-            const { id, url } = item
+            const { id, url, title, crawlUrl } = item
             return <div key={id}>
-              <img src={url.replace('http://192.168.1.6:8888/', 'http://util.online:8888/')} />
+              <img alt={`${title}${url ? '' : ' (同步中)'}`} src={url.replace('http://192.168.1.6:8888/', 'http://util.online:8888/') || crawlUrl} />
             </div>
           })}
         </div>

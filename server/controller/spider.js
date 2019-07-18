@@ -214,7 +214,8 @@ const addControllers = (server) => {
 
   server.get('/spider/api/photo/:type', async (req, res) => {
     const { type } = req.params
-    const results = await dao.queryOssRows(type)
+    const { pageSize, pageNum } = req.query
+    const results = await dao.queryOssRows(type, pageSize, pageNum)
 
     res.json(ResultUtil.success(results))
   })

@@ -1,8 +1,11 @@
 const { pool } = require('./mysql')
 const camelcaseKeys = require('camelcase-keys')
 
-async function queryOssRows (type = 'NOVEL') {
-  const rows = await pool.queryAsync('SELECT * FROM oss WHERE `type` = ? ', [type])
+async function queryOssRows (type = 'NOVEL', pageSize, pageNum) {
+  const from = (pageNum - 1) * pageSize
+  const offset = pageSize
+  const rows = await pool.queryAsync('SELECT * FROM oss WHERE `type` = ? ORDER BY id DESC LIMIT ? , ' + offset, [type, from]
+  )
   return camelcaseKeys(rows)
 }
 async function queryNovelRow (id, chapter) {
