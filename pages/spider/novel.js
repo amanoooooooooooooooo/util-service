@@ -7,7 +7,9 @@ import Fetch from '../../client/service.js'
 class Spider extends React.Component {
     state = {
       novels: [],
-      filter: ''
+      filter: '',
+      pageNum: 1,
+      pageSize: 20
     }
     crawlUrl= {}
     name= {}
@@ -16,7 +18,8 @@ class Spider extends React.Component {
       this.query()
     }
     async query () {
-      const res = await fetch('./api/oss').then(res => res.json())
+      const { pageNum, pageSize } = this.state
+      const res = await Fetch.get('/spider/api/oss', { pageNum, pageSize })
       const { errMsg, payload: novels } = res
       !errMsg && this.setState({
         novels
@@ -43,6 +46,21 @@ class Spider extends React.Component {
         alert(errMsg)
       }
     }
+    _pre = () => {
+      const { pageNum } = this.state
+      if (pageNum === 1) {
+        return
+      }
+      this.setState({
+        pageNum: pageNum - 1
+      }, this.query)
+    }
+    _next =() => {
+      const { pageNum } = this.state
+      this.setState({
+        pageNum: pageNum + 1
+      }, this.query)
+    }
     render () {
       const { novels, filter } = this.state
       return <Layout>
@@ -55,6 +73,10 @@ class Spider extends React.Component {
               </Link>
             </div>
           })}
+          <div style={{ marginTop: '1rem' }} className='chapter-action'>
+            <div onClick={this._pre} >上一页</div>
+            <div onClick={this._next}>下一页</div>
+          </div>
           <Filter filter={this.filter} />
           <hr />
           <h2>添加想爬取的小说</h2>

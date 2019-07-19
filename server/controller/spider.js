@@ -1,4 +1,3 @@
-var fetch = require('isomorphic-unfetch')
 var request = require('request')
 
 const dao = require('../dao')
@@ -18,7 +17,8 @@ function md5 (string) {
 
 const addControllers = (server) => {
   server.get('/spider/api/oss', async (req, res) => {
-    const ossRows = await dao.queryOssRows()
+    const { pageSize, pageNum } = req.query
+    const ossRows = await dao.queryOssRows('NOVEL', pageSize, pageNum)
     res.json(ResultUtil.success(ossRows))
   })
   server.get('/spider/api/novel/:id/:chapter', async (req, res) => {
