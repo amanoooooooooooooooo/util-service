@@ -1,6 +1,8 @@
 var SSH2Client = require('ssh2').Client
 
 function useSshForward (channelCallback) {
+  const ssh = new SSH2Client()
+
   const sshConf = {
     host: '39.104.226.149',
     port: 22,
@@ -8,8 +10,6 @@ function useSshForward (channelCallback) {
     privateKey: require('fs').readFileSync('/Users/hikaruamano/.ssh/id_rsa')
   }
 
-  console.log('useSshForward')
-  const ssh = new SSH2Client()
   ssh.on('ready', function () {
     console.log('Client :: ready')
 

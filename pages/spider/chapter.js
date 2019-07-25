@@ -7,8 +7,9 @@ import { LOCAL_PREFFIX } from '../../client/constant.js'
 
 class Chapter extends React.Component {
   static async getInitialProps (props) {
-    const { query: { id, chapter: chapterIndex } } = props
+    if (!props.req) return
 
+    const { query: { id, chapter: chapterIndex } } = props
     const res = await Fetch.get(LOCAL_PREFFIX + `/spider/api/novel/${id}/${chapterIndex}`)
     const { errMsg, payload } = res
     if (errMsg) {

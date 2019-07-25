@@ -110,7 +110,9 @@ function AddNewNovel (props) {
   </div>
 }
 
-Novel.getInitialProps = async function () {
+Novel.getInitialProps = async function (props) {
+  if (!props.req) return
+
   const pageNum = 1
   const pageSize = 20
   const res = await Fetch.get(LOCAL_PREFFIX + '/spider/api/oss', { pageNum, pageSize })
