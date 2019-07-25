@@ -3,24 +3,31 @@ import Layout from '../../components/MyLayout.js'
 import { withRouter } from 'next/router'
 import Link from 'next/link'
 import Fetch from '../../client/service.js'
+import { LOCAL_PREFFIX } from '../../client/constant.js'
 
 class Chapter extends React.Component {
+  static async getInitialProps (props) {
+    const { query: { id, chapter: chapterIndex } } = props
+
+    const res = await Fetch.get(LOCAL_PREFFIX + `/spider/api/novel/${id}/${chapterIndex}`)
+    const { errMsg, payload } = res
+    if (errMsg) {
+      throw new Error(errMsg)
+    }
+    const chapter = { ...payload, content: payload.content.replace(/\s\s\s\s/g, '\n    ') }
+
+    return {
+      chapter,
+      id,
+      chapterIndex
+    }
+  }
     state = {
-      chapter: ''
+      chapter: this.props.chapter,
+      id: this.props.id,
+      chapterIndex: this.props.chapterIndex
     }
     async componentDidMount () {
-      const { router } = this.props
-      const { query: { id, chapter: chapterIndex } } = router
-      const res = await Fetch.get(`/spider/api/novel/${id}/${chapterIndex}`)
-      const { errMsg, payload } = res
-      if (errMsg) return
-
-      const chapter = { ...payload, content: payload.content.replace(/\s\s\s\s/g, '\n    ') }
-      this.setState({
-        chapter,
-        id,
-        chapterIndex
-      })
     }
 
     render () {

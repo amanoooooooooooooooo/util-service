@@ -3,24 +3,29 @@ import Layout from '../../components/MyLayout.js'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import Fetch from '../../client/service.js'
-import { MAKR_LOGIN } from '../../client/constant'
+import { MAKR_LOGIN, LOCAL_PREFFIX } from '../../client/constant'
 
 const MAIL_PATTERN = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
 
 class Chapters extends React.Component {
+  static async getInitialProps (props) {
+    const { query: { id } } = props
+    const res = await Fetch.get(LOCAL_PREFFIX + `/spider/api/novel/${id}`)
+    const { errMsg, payload } = res
+    if (errMsg) {
+      throw new Error(errMsg)
+    }
+    return {
+      chapters: payload.reverse()
+    }
+  }
     state = {
-      chapters: [],
+      chapters: this.props.chapters,
       reverse: true,
       show: false
     }
     mail ={}
     async componentDidMount () {
-      const { query: { id } } = this.props.router
-      const res = await Fetch.get(`/spider/api/novel/${id}`)
-      const { errMsg, payload } = res
-      !errMsg && this.setState({
-        chapters: payload.reverse()
-      })
       this._updateMail()
     }
     _updateMail () {

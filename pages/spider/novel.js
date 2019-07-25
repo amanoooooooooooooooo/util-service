@@ -1,12 +1,12 @@
 import React from 'react'
-import fetch from 'isomorphic-unfetch'
 import Layout from '../../components/MyLayout.js'
 import Link from 'next/link'
 import Fetch from '../../client/service.js'
+import { LOCAL_PREFFIX } from '../../client/constant.js'
 
-class Spider extends React.Component {
+class Novel extends React.Component {
     state = {
-      novels: [],
+      novels: this.props.novels,
       filter: '',
       pageNum: 1,
       pageSize: 20
@@ -15,7 +15,7 @@ class Spider extends React.Component {
     name= {}
 
     componentDidMount () {
-      this.query()
+      // this.query()
     }
     async query () {
       const { pageNum, pageSize } = this.state
@@ -68,7 +68,7 @@ class Spider extends React.Component {
           <h2>已爬取的小说</h2>
           {novels.filter(item => item.name.indexOf(filter) !== -1).map(item => {
             return <div key={item.id}>
-              <Link href={`./novel/${item.id}`}>
+              <Link href={`/spider/novel/${item.id}`}>
                 <a>{item.name}</a>
               </Link>
             </div>
@@ -110,4 +110,18 @@ function AddNewNovel (props) {
   </div>
 }
 
-export default Spider
+Novel.getInitialProps = async function () {
+  const pageNum = 1
+  const pageSize = 20
+  const res = await Fetch.get(LOCAL_PREFFIX + '/spider/api/oss', { pageNum, pageSize })
+  const { errMsg, payload: novels } = res
+
+  if (errMsg) {
+    throw new Error(errMsg)
+  }
+  return {
+    novels
+  }
+}
+
+export default Novel
