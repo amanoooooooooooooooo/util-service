@@ -5,6 +5,19 @@ import Fetch from '../../client/service.js'
 import { LOCAL_PREFFIX } from '../../client/constant.js'
 
 class Novel extends React.Component {
+  static async getInitialProps (props) {
+    const pageNum = 1
+    const pageSize = 20
+    const res = await Fetch.get(LOCAL_PREFFIX + '/spider/api/oss', { pageNum, pageSize })
+    const { errMsg, payload: novels } = res
+
+    if (errMsg) {
+      throw new Error(errMsg)
+    }
+    return {
+      novels
+    }
+  }
     state = {
       novels: this.props.novels,
       filter: '',
@@ -108,22 +121,6 @@ function AddNewNovel (props) {
     <div onClick={add}>增加</div>
 
   </div>
-}
-
-Novel.getInitialProps = async function (props) {
-  if (!props.req) return
-
-  const pageNum = 1
-  const pageSize = 20
-  const res = await Fetch.get(LOCAL_PREFFIX + '/spider/api/oss', { pageNum, pageSize })
-  const { errMsg, payload: novels } = res
-
-  if (errMsg) {
-    throw new Error(errMsg)
-  }
-  return {
-    novels
-  }
 }
 
 export default Novel

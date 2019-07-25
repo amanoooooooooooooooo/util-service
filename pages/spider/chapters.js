@@ -9,8 +9,6 @@ const MAIL_PATTERN = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
 
 class Chapters extends React.Component {
   static async getInitialProps (props) {
-    if (!props.req) return
-
     const { query: { id } } = props
     const res = await Fetch.get(LOCAL_PREFFIX + `/spider/api/novel/${id}`)
     const { errMsg, payload } = res
