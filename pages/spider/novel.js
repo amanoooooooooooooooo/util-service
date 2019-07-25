@@ -6,6 +6,13 @@ import { LOCAL_PREFFIX } from '../../client/constant.js'
 
 class Novel extends React.Component {
   static async getInitialProps (props) {
+    let endpoint = LOCAL_PREFFIX
+    if (!props.req) {
+      endpoint = document.location.protocol + '//' + window.location.host
+    }
+
+    console.log('endpoint', endpoint)
+
     const pageNum = 1
     const pageSize = 20
     const res = await Fetch.get(LOCAL_PREFFIX + '/spider/api/oss', { pageNum, pageSize })
