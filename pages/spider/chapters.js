@@ -17,7 +17,7 @@ class Chapters extends React.Component {
     console.log('endpoint', endpoint)
 
     const { query: { id } } = props
-    const res = await Fetch.get(LOCAL_PREFFIX + `/spider/api/novel/${id}`)
+    const res = await Fetch.get(endpoint + `/spider/api/novel/${id}`)
     const { errMsg, payload } = res
     if (errMsg) {
       throw new Error(errMsg)

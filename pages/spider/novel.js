@@ -15,7 +15,7 @@ class Novel extends React.Component {
 
     const pageNum = 1
     const pageSize = 20
-    const res = await Fetch.get(LOCAL_PREFFIX + '/spider/api/oss', { pageNum, pageSize })
+    const res = await Fetch.get(endpoint + '/spider/api/oss', { pageNum, pageSize })
     const { errMsg, payload: novels } = res
 
     if (errMsg) {

@@ -15,7 +15,7 @@ class Chapter extends React.Component {
     console.log('endpoint', endpoint)
 
     const { query: { id, chapter: chapterIndex } } = props
-    const res = await Fetch.get(LOCAL_PREFFIX + `/spider/api/novel/${id}/${chapterIndex}`)
+    const res = await Fetch.get(endpoint + `/spider/api/novel/${id}/${chapterIndex}`)
     const { errMsg, payload } = res
     if (errMsg) {
       throw new Error(errMsg)
