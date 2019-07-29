@@ -1,5 +1,11 @@
-export default (req, res) => {
-  res.setHeader('Content-Type', 'application/json')
-  res.statusCode = 200
-  res.end(JSON.stringify({ name: 'Nextjs' }))
-}
+const { send } = require('micro')
+const methods = require('micro-method-router')
+
+module.exports = methods({
+  async get (req, res) {
+    return send(res, 200, `It's a GET request!`)
+  },
+  async post (req, res) {
+    return send(res, 200, `It's a POST request!`)
+  }
+})
