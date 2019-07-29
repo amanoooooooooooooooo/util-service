@@ -1,4 +1,6 @@
 export function test (a: string) {
+  console.log('a ', a);
+  
   return 1
 }
 
