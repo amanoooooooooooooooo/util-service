@@ -12,9 +12,13 @@ const Client = (secretId?: string, secertKey?: string) => new Core({
     apiVersion: '2015-01-09'
 })
 
-export default async function dns(req: NextApiRequest, _: NextApiResponse) {
+export default async function dns(req: NextApiRequest, res: NextApiResponse) {
     // @ts-ignore
-    const { secretId, secertKey, domainName = 'util.online', RR, type = 'A', value } = body || {}
+    const { secretId, secertKey, domainName = 'util.online', RR, type = 'A', value } = req.body || {}
+    console.log('req', req.body);
+    console.log('RR  ', RR);
+    console.log('value  ', value);
+
 
     const requestParams = {
         DomainName: 'util.online'
@@ -24,22 +28,39 @@ export default async function dns(req: NextApiRequest, _: NextApiResponse) {
         method: 'POST'
     }
     switch (req.method) {
-        case 'GET':
-            return client.request('DescribeDomainRecords', requestParams, requestOption)
+        case 'GET': {
+            const r = await client.request('DescribeDomainRecords', requestParams, requestOption)
+            res.json(r)
+            break
+        }
         case 'POST': {
             const requestParams = {
                 DomainName: domainName, // util.online
-                RR: RR, // lin2heart
+                RR, // lin2heart
                 Type: type, // A | NS | MX | TXT | CNAME | SRV | AAAA | CAA | REDIRECT_URL | FORWARD_URL refre to https://help.aliyun.com/document_detail/29805.html?spm=a2c4g.11186623.2.20.118a2846NGdMrE
                 Value: value // 10.10.1.214
             }
-            return client.request('AddDomainRecord', requestParams, requestOption)
+            console.log('requestParams', requestParams);
+
+            const r = await client.request('AddDomainRecord', requestParams, requestOption)
+            res.json(r)
+            break
         }
         case 'DELETE':
-            return client.request('DeleteDomainRecord', requestParams, requestOption)
+            const r = await client.request('DeleteDomainRecord', requestParams, requestOption)
+            res.json(r)
+            break
         default:
+            throw new Error('invalid')
             break;
     }
 
 
 }
+
+
+// export const config = {
+//     api: {
+//         bodyParser: true,
+//     },
+// }
