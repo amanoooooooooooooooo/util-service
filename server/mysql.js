@@ -1,6 +1,8 @@
 var mysql = require('mysql2')
 
-const { useSshForward } = require('./ssh')
+const {
+  useSshForward
+} = require('./ssh')
 
 const DB_HOST = process.env.DB_HOST || '127.0.0.1' // '172.16.10.45' || "localhost"
 const DB_PORT = process.env.DB_PORT || 3306
@@ -23,7 +25,7 @@ const sqlConf = {
 let pool
 let promisePool
 
-async function callback (err, stream) {
+async function callback(err, stream) {
   if (err) throw err
 
   pool = mysql.createPool({
@@ -39,8 +41,6 @@ if (ENV === 'prod') {
   useSshForward(callback)
 }
 
-function getPool () {
+export function getPool() {
   return promisePool
 }
-exports.getPool = getPool
-exports.pool = promisePool

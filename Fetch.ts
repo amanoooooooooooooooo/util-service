@@ -1,3 +1,24 @@
+export interface Result<T> {
+    errMsg: string | null
+    payload: T
+}
+
+export class ResultUtil {
+    static send(errMsg: string | null, payload?: any) {
+        return {
+            errMsg,
+            payload
+        }
+    }
+
+    static success(payload: any) {
+        return ResultUtil.send(null, payload)
+    }
+    static fail(errMsg = 'DEFAULT ERROR') {
+        return ResultUtil.send(errMsg)
+    }
+}
+
 const obj2urlParams = (obj: any): string => {
     return Object.keys(obj).length === 0
         ? ''

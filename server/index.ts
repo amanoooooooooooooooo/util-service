@@ -1,6 +1,8 @@
-export function test (a: string) {
+require('./mysql')
+
+export function test(a: string) {
   console.log('a ', a);
-  
+
   return 1
 }
 
