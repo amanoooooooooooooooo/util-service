@@ -8,15 +8,15 @@ const layoutStyle = {
   height: '100%'
 }
 
-const Layout = (props) => (
-  <div style={layoutStyle}>
+const Layout = (props: any) => (
+  <div style={layoutStyle} >
     <NextHead>
       <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1' />
     </NextHead>
-    <NextHead>
+    < NextHead >
       <meta httpEquiv='Content-Type' content='application/xhtml+xml;charset=utf-8' />
     </NextHead>
-    <style jsx global>{`
+    < style jsx global > {`
       html,body { 
         height:100%;
         margin:0;
@@ -46,7 +46,7 @@ const Layout = (props) => (
       }
 
     `}</style>
-    <Header />
+    < Header />
     <hr />
     {props.children}
   </div>

@@ -1,25 +1,20 @@
-const delay = (time: number) =>
-  new Promise(resolve => setTimeout(() => resolve(true), time))
+import { MAKR_LOGIN } from "./client/constant";
+import { LocalUser } from "./types";
 
-class ResultUtil {
-  static send(errMsg: string | null, payload?: any) {
-    return {
-      errMsg,
-      payload
-    }
-  }
 
-  static success(payload: any) {
-    return ResultUtil.send(null, payload)
+export function getUserStorage(): LocalUser {
+  const userString = (typeof localStorage !== 'undefined') && localStorage.getItem(MAKR_LOGIN)
+  let user = {}
+  try {
+    user = JSON.parse(userString as string) || {}
+  } catch (error) {
+    console.error('getUserStorage e', error)
   }
-  static fail(errMsg = 'DEFAULT ERROR') {
-    return ResultUtil.send(errMsg)
-  }
+  return user
 }
-
-exports.delay = delay
-exports.ResultUtil = ResultUtil
-
+export function setUserStorage(user: LocalUser) {
+  localStorage.setItem(MAKR_LOGIN, JSON.stringify(user))
+}
 
 export function mParseInt(x: string | string[]) {
   return x instanceof Array ? parseInt(x[0]) : parseInt(x)

@@ -1,6 +1,6 @@
 import Link from 'next/link'
+import { getUserStorage } from '../utils';
 
-import { getUserStorage } from '../client/util'
 
 const linkStyle = {
   marginRight: 15

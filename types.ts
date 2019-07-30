@@ -1,6 +1,9 @@
 export interface LocalUser {
     name?: string
     mail?: string
+    id?: number
+    nick?: string
+    pass?: string
 }
 
 

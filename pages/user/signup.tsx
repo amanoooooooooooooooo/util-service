@@ -1,13 +1,15 @@
-import Layout from '../../components/MyLayout.js'
+import Layout from '../../components/MyLayout.jsx'
 import React, { useState } from 'react'
-import { setUserStorage } from '../../client/util'
 import FetchApi from '../../client/service.js'
 import { withRouter } from 'next/router'
+import { setUserStorage } from '../../utils.js';
+import { LocalUser } from '../../types.js';
 
-function Signup (props) {
-  const [user, setUser] = useState({})
+function Signup(props: any) {
 
-  const updateValue = (e, type) => {
+  const [user, setUser] = useState({} as LocalUser)
+
+  const updateValue = (e: any, type: string) => {
     const newUser = {
       ...user,
       [type]: e.target.value

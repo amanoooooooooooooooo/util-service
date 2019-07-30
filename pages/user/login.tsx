@@ -1,11 +1,10 @@
-import Layout from '../../components/MyLayout.js'
+import Layout from '../../components/MyLayout.jsx'
 import { withRouter } from 'next/router'
 import React, { useState } from 'react'
 import FetchApi from '../../client/service.js'
-import { setUserStorage } from '../../client/util'
 
-function Login (props) {
-  function _toSignup () {
+function Login(props: any) {
+  function _toSignup() {
     props.router.push('/user/signup')
   }
 
