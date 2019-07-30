@@ -1,7 +1,7 @@
 var fetch = require('isomorphic-unfetch')
 const Core = require('@alicloud/pop-core')
 
-const { delay } = require('../utils')
+const { delay } = require('../../utils')
 
 const SECERT_ID = process.env.SECERT_ID
 const SECERT_KEY = process.env.SECERT_KEY

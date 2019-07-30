@@ -1,42 +1,7 @@
 import { getPool } from './mysql'
 import camelcaseKeys from 'camelcase-keys';
+import { OssRow, UserRow, RssRow, Novel } from '../types';
 
-export interface Oss {
-  id: string
-  name: string
-  type: string
-  crwalUrl: string
-}
-export interface OssRow {
-  id: string
-  name: string
-  type: string
-  crwal_url: string
-}
-export interface Novel {
-  chapterIndex: number
-  chapterTitle: string
-  ossId: number
-  content: string
-  crawlUrl: string
-}
-export interface NovelRow {
-  chapter_index: number
-  chapter_title: string
-  oss_id: number
-  content: string
-  crawl_url: string
-}
-export interface UserRow {
-  nick: string
-  mail: string
-  phone: string
-  pass: string
-}
-export interface RssRow {
-  user_id: number
-  oss_id: number
-}
 export async function queryOssRows(type = 'NOVEL', pageSize: number, pageNum: number) {
   const from = (pageNum - 1) * pageSize
   const offset = pageSize
@@ -44,8 +9,9 @@ export async function queryOssRows(type = 'NOVEL', pageSize: number, pageNum: nu
   const [rows] = await getPool().query('SELECT * FROM oss WHERE `type` = ? ORDER BY id DESC LIMIT ? , ' + offset, [type, from])
   return camelcaseKeys(rows)
 }
-export async function queryNovelRow(id: number, chapter: number) {
+export async function queryNovelRow(id: number, chapter: number): Promise<Novel[]> {
   const [rows] = await getPool().query(`SELECT * FROM novel WHERE oss_id = ${id} AND chapter_index = ${chapter} `)
+  //@ts-ignore
   return camelcaseKeys(rows)
 }
 export async function queryRssRows(userId: number, ossId: number) {
