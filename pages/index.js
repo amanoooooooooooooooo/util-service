@@ -54,10 +54,10 @@ const Index = (props) => (
     <Link href={`/static/3dshow/index.html`}>
       <a>3d show</a>
     </Link> */}
-    <br />
+    {/* <br />
     <Link href={`/static/bgtranslation/index.html`}>
       <a>bg translation</a>
-    </Link>
+    </Link> */}
 
   </Layout>
 )
