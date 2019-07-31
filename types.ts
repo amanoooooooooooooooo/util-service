@@ -23,6 +23,7 @@ export interface Oss {
     name: string
     type: string
     crwalUrl: string
+    createTime: string
 }
 export interface OssRow {
     id: string
@@ -45,7 +46,6 @@ export interface NovelRow {
     content: string
     crawl_url: string
     nextCrawl_url: string
-
 }
 export interface UserRow {
     nick: string
@@ -61,4 +61,12 @@ export interface Rss {
     id: number
     userId: number
     ossId: number
+}
+export interface Photo {
+    id: number
+    ossId: number
+    url: string
+    crawlUrl: string
+    index: number
+    title: string
 }

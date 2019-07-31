@@ -17,5 +17,8 @@ export function setUserStorage(user: LocalUser) {
 }
 
 export function mParseInt(x: string | string[]) {
-  return x instanceof Array ? parseInt(x[0]) : parseInt(x)
+  return parseInt(mValue(x))
+}
+export function mValue(x: string | string[]) {
+  return x instanceof Array ? x[0] : x
 }

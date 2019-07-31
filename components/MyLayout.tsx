@@ -44,6 +44,10 @@ const Layout = (props: any) => (
         justify-content: space-between;
         height: 2rem;
       }
+      .flex {
+        display: flex;
+        justify-content: space-between;
+      }
 
     `}</style>
     < Header />
