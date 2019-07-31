@@ -69,7 +69,7 @@ export default class Novel extends React.Component {
             alert('请输入小说名')
             return
         }
-        const { errMsg } = await Fetch.post('/spider/api/novel', { name, crawlUrl })
+        const { errMsg } = await Fetch.post('/api/novel', { name, crawlUrl })
 
         if (!errMsg) {
             alert('成功')

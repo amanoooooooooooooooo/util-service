@@ -1,6 +1,6 @@
 import { ClientChannel } from "ssh2";
 
-import mysql from 'mysql2'
+import mysql from 'mysql2/promise'
 
 const {
   useSshForward
@@ -25,7 +25,6 @@ const sqlConf = {
 }
 
 let pool: any
-let promisePool: any
 
 async function callback(err: Error, stream: ClientChannel, resolve: Function, reject: Function) {
   if (err) {
@@ -37,23 +36,22 @@ async function callback(err: Error, stream: ClientChannel, resolve: Function, re
     stream: stream // <--- this is the important part
   })
 
-  promisePool = pool.promise()
-  resolve(promisePool)
+  resolve(pool)
 }
 
 
 export async function getPool() {
-  if (typeof promisePool === 'undefined') {
+  if (typeof pool === 'undefined') {
     console.warn('extra init')
     await init()
   }
-  return promisePool
+  return pool
 }
 
 export async function init() {
   if (ENV === 'prod') {
     pool = mysql.createPool(sqlConf)
-    return promisePool = pool.promise()
+    return pool
   } else {
     return await useSshForward(callback)
   }

@@ -6,6 +6,8 @@ import { UserRow } from "../../types";
 
 
 export default async function oss(req: NextApiRequest, res: NextApiResponse) {
+    console.log('oss api');
+
     switch (req.method) {
         case 'GET':
             res.json(ResultUtil.fail('get '))
@@ -19,14 +21,16 @@ export default async function oss(req: NextApiRequest, res: NextApiResponse) {
 
             console.log('userRow', userRow)
 
-            //@ts-ignore
-            const conn = await getPool().getConnectionAsync()
+            const pool = await getPool()
+            const conn = await pool.getConnection()
             // console.log('got conn %o', conn)
-            await conn.beginTransactionAsync()
+            await conn.beginTransaction()
 
             try {
                 const rows = await dao.queryUserWithOption(conn, mail)
                 let userId: number = -1
+                console.log('rows', rows);
+
                 if (rows.length === 0) {
                     const res = await dao.insertUser(conn, userRow)
                     console.log('insertUser is ', res)
@@ -41,17 +45,17 @@ export default async function oss(req: NextApiRequest, res: NextApiResponse) {
                     user_id: userId,
                     oss_id: ossId
                 }
-                const rssResults = await dao.queryRssRows(userId, ossId)
+                const rssResults = await dao.queryRssRows(conn, userId, ossId)
                 if (rssResults.length > 0) {
                     res.json(ResultUtil.fail('已订阅'))
                 } else {
                     await dao.insertRss(conn, rssRow)
-                    await conn.commitAsync()
+                    await conn.commit()
                     res.json(ResultUtil.success())
                 }
             } catch (e) {
                 console.error('spider/api/sub e', e)
-                await conn.rollbackAsync()
+                await conn.rollback()
                 res.json(ResultUtil.fail(e))
             } finally {
                 conn.release()

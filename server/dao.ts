@@ -17,10 +17,8 @@ export async function queryNovelRow(id: number, chapter: number): Promise<Novel[
   //@ts-ignore
   return camelcaseKeys(rows)
 }
-export async function queryRssRows(userId: number, ossId: number) {
-  const pool = await getPool()
-
-  const [rows] = await pool.query(`SELECT * FROM rss WHERE user_id = ${userId} AND oss_id = ${ossId} `)
+export async function queryRssRows(conn: any, userId: number, ossId: number) {
+  const [rows] = await conn.query(`SELECT * FROM rss WHERE user_id = ${userId} AND oss_id = ${ossId} `)
   return camelcaseKeys(rows)
 }
 

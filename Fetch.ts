@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 
+console.debug = () => { }
 
 export interface Result<T> {
     errMsg: string | null
@@ -76,7 +77,7 @@ export default class Fetch {
 
         const options = {
             method: 'POST',
-            body: body,
+            body: JSON.stringify(body),
             headers: commonHeaders(),
         }
         const result = await fetch(url, options)

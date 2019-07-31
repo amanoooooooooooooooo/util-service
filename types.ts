@@ -26,10 +26,10 @@ export interface Oss {
     createTime: string
 }
 export interface OssRow {
-    id: string
+    id?: string
     name: string
     type: string
-    crwal_url: string
+    crawl_url: string
 }
 export interface Novel {
     chapterIndex: string
