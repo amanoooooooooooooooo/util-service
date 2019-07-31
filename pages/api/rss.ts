@@ -19,6 +19,7 @@ export default async function oss(req: NextApiRequest, res: NextApiResponse) {
 
             console.log('userRow', userRow)
 
+            //@ts-ignore
             const conn = await getPool().getConnectionAsync()
             // console.log('got conn %o', conn)
             await conn.beginTransactionAsync()

@@ -1,4 +1,4 @@
-import Layout from '../../components/MyLayout.jsx'
+import Layout from '../../components/MyLayout'
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'next/router'
 import Link from 'next/link'

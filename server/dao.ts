@@ -7,25 +7,33 @@ export async function queryOssRows(type = 'NOVEL', pageSize: number, pageNum: nu
   const from = (pageNum - 1) * pageSize
   const offset = pageSize
 
-  const [rows] = await getPool().query('SELECT * FROM oss WHERE `type` = ? ORDER BY id DESC LIMIT ? , ' + offset, [type, from])
+  const pool = await getPool()
+  const [rows] = await pool.query('SELECT * FROM oss WHERE `type` = ? ORDER BY id DESC LIMIT ? , ' + offset, [type, from])
   return camelcaseKeys(rows)
 }
 export async function queryNovelRow(id: number, chapter: number): Promise<Novel[]> {
-  const [rows] = await getPool().query(`SELECT * FROM novel WHERE oss_id = ${id} AND chapter_index = ${chapter} `)
+  const pool = await getPool()
+  const [rows] = await pool.query(`SELECT * FROM novel WHERE oss_id = ${id} AND chapter_index = ${chapter} `)
   //@ts-ignore
   return camelcaseKeys(rows)
 }
 export async function queryRssRows(userId: number, ossId: number) {
-  const [rows] = await getPool().query(`SELECT * FROM rss WHERE user_id = ${userId} AND oss_id = ${ossId} `)
+  const pool = await getPool()
+
+  const [rows] = await pool.query(`SELECT * FROM rss WHERE user_id = ${userId} AND oss_id = ${ossId} `)
   return camelcaseKeys(rows)
 }
 
 export async function queryNovelChapters(id: number) {
-  const [rows] = await getPool().query(`SELECT chapter_index, chapter_title FROM novel WHERE oss_id = ${id} `)
+  const pool = await getPool()
+
+  const [rows] = await pool.query(`SELECT chapter_index, chapter_title FROM novel WHERE oss_id = ${id} `)
   return camelcaseKeys(rows)
 }
 export async function insertOss(oss: OssRow) {
-  const [result] = await getPool().query(`INSERT INTO oss SET ?  `, [oss])
+  const pool = await getPool()
+
+  const [result] = await pool.query(`INSERT INTO oss SET ?  `, [oss])
   return result
 }
 export async function insertUser(conn: any, user: UserRow): Promise<InsertRes> {
@@ -38,7 +46,9 @@ export async function insertRss(conn: any, rss: RssRow) {
 }
 export async function queryOssWithOption(name: string, crawlUrl: string) {
   const suffix = crawlUrl ? ' AND crawl_url = "' + crawlUrl + '" ' : ''
-  const [rows] = await getPool().query(`SELECT * FROM oss where name = ? ${suffix}`, [name])
+  const pool = await getPool()
+
+  const [rows] = await pool.query(`SELECT * FROM oss where name = ? ${suffix}`, [name])
   return camelcaseKeys(rows)
 }
 export async function queryUserWithOption(conn: any, mail: string): Promise<UserRow[]> {
@@ -47,14 +57,19 @@ export async function queryUserWithOption(conn: any, mail: string): Promise<User
   return camelcaseKeys(rows)
 }
 export async function updateUser(user: UserRow, id: number) {
-  return getPool().query(`UPDATE user SET ? WHERE id = ?`, [user, id])
+  const pool = await getPool()
+
+  return pool.query(`UPDATE user SET ? WHERE id = ?`, [user, id])
 }
 export async function queryOssInRss(userId: number) {
-  const [rows] = await getPool().query(`SELECT * FROM rss LEFT JOIN oss ON rss.oss_id = oss.id WHERE  user_id = ?`, [userId])
+  const pool = await getPool()
+
+  const [rows] = await pool.query(`SELECT * FROM rss LEFT JOIN oss ON rss.oss_id = oss.id WHERE  user_id = ?`, [userId])
   return camelcaseKeys(rows)
 }
 export async function queryPhotoRows(ossId: number) {
-  const [rows] = await getPool().query('SELECT * FROM photo WHERE oss_id = ? ', [ossId])
+  const pool = await getPool()
+  const [rows] = await pool.query('SELECT * FROM photo WHERE oss_id = ? ', [ossId])
   return camelcaseKeys(rows)
 }
 
