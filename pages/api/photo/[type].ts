@@ -2,14 +2,21 @@ import { NextApiRequest, NextApiResponse } from "next";
 import * as dao from '../../../server/dao'
 import { ResultUtil } from "../../../Fetch";
 import { mParseInt, mValue } from '../../../utils'
+import { Level } from "../../../types";
 
 
 export default async function PhotoType(req: NextApiRequest, res: NextApiResponse) {
     const { type, pageSize, pageNum } = req.query
-    const { cookies } = req
 
-    console.log('cookies', cookies);
+    const level = parseInt(req.cookies.vip || '0') as Level
 
-    const chapters = await dao.queryOssRows(mValue(type), mParseInt(pageSize), mParseInt(pageNum))
+    const types = dao.queryPhotoTypes(level)
+
+    console.log('types', types);
+    console.log('req.query', req.query);
+    console.log('type', type, mValue(type));
+
+    const photoType = types[mValue(type)].type
+    const chapters = await dao.queryOssRows(photoType, mParseInt(pageSize), mParseInt(pageNum))
     res.json(ResultUtil.success(chapters))
 }

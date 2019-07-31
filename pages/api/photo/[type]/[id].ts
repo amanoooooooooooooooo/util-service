@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import * as dao from '../../../../server/dao'
 import { ResultUtil } from "../../../../Fetch";
-import { mParseInt, mValue } from '../../../../utils'
+import { mParseInt } from '../../../../utils'
 
 
 export default async function PhotoType(req: NextApiRequest, res: NextApiResponse) {

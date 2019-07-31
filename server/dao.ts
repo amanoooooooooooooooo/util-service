@@ -1,6 +1,6 @@
 import { getPool } from './mysql'
 import camelcaseKeys from 'camelcase-keys';
-import { OssRow, UserRow, RssRow, Novel, InsertRes } from '../types';
+import { OssRow, UserRow, RssRow, Novel, InsertRes, PhotoTypes, Level } from '../types';
 
 
 export async function queryOssRows(type = 'NOVEL', pageSize: number, pageNum: number) {
@@ -71,3 +71,68 @@ export async function queryPhotoRows(ossId: number) {
   return camelcaseKeys(rows)
 }
 
+
+export function queryPhotoTypes(level: Level) {
+  switch (level) {
+    case 0:
+      return initPhotoTypes
+    case 1:
+      return Object.assign(photoTypes, initPhotoTypes)
+  }
+  return photoTypes
+}
+
+const initPhotoTypes: PhotoTypes = {
+  pet: {
+    type: 'PHOTO2_PET',
+    name: '宠物',
+    key: 'pet'
+  },
+  landscape: {
+    type: 'PHOTO2_LANDSCAPE',
+    name: '自然',
+    key: 'landscape'
+  }
+}
+const photoTypes: PhotoTypes = {
+  pure: {
+    type: 'PHOTO_PURE',
+    name: '清纯唯美',
+    key: 'pure'
+  },
+  east: {
+    type: 'PHOTO_EAST',
+    name: '亚洲性爱',
+    key: 'east'
+  },
+  west: {
+    type: 'PHOTO_WEST',
+    name: '欧美激情',
+    key: 'west'
+  },
+  self: {
+    type: 'PHOTO_SELF',
+    name: '自拍偷拍',
+    key: 'self'
+  },
+  uniform: {
+    type: 'PHOTO_UNIFORM',
+    name: '制服诱惑',
+    key: 'uniform'
+  },
+  rape: {
+    type: 'PHOTO_RAPE',
+    name: '强奸乱伦',
+    key: 'rape'
+  },
+  comic: {
+    type: 'PHOTO_COMIC',
+    name: '动漫卡通',
+    key: 'comic'
+  },
+  rank: {
+    type: 'PHOTO_RANK',
+    name: '推女郎',
+    key: 'rank'
+  }
+}

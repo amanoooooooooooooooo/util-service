@@ -2,34 +2,16 @@ import React from 'react'
 import Layout from '../../../components/MyLayout'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
-import { PhotoTypes, LOCAL_PREFFIX } from '../../../client/constant'
 import Fetch, { Result } from '../../../Fetch';
-import { NextPageContext } from 'next';
-import { mValue } from '../../../utils';
 import { Oss } from '../../../types';
+import { NextPageContext } from 'next';
+
 
 class Gallerys extends React.Component<any, any> {
   static async getInitialProps(props: NextPageContext) {
-    let endpoint = LOCAL_PREFFIX
-    if (!props.req) {
-      endpoint = document.location.protocol + '//' + window.location.host
-    }
-
-    console.log('endpoint', endpoint)
-
     const { query: { type } } = props
-    const pageNum = 1
-    const pageSize = 20
-
-    const res = await Fetch.get(endpoint + `/api/photo/${PhotoTypes[mValue(type)].type}`, { pageNum, pageSize })
-    const { errMsg, payload }: Result<Oss[]> = res
-    if (errMsg) {
-      throw new Error(errMsg)
-    }
     return {
-      gallerys: payload,
-      pageNum,
-      pageSize
+      type
     }
   }
   state: {
@@ -37,16 +19,19 @@ class Gallerys extends React.Component<any, any> {
     pageNum: number
     pageSize: number
   } = {
-      gallerys: this.props.gallerys,
-      pageNum: this.props.pageNum,
-      pageSize: this.props.pageSize,
+      gallerys: [],
+      pageNum: 1,
+      pageSize: 20,
     }
 
+  componentDidMount() {
+    this._query()
+  }
   _query = async () => {
     const { pageSize, pageNum } = this.state
     const { query: { type } } = this.props.router
-    console.log('Gallerys type', type)
-    const res = await Fetch.get(`/api/photo/${PhotoTypes[type].type}`, { pageNum, pageSize })
+    console.log('Gallerys type', type, this.props.router)
+    const res = await Fetch.get(`/api/photo/${this.props.type}`, { pageNum, pageSize })
     const { errMsg, payload }: Result<Oss[]> = res
     !errMsg && this.setState({
       gallerys: payload
@@ -91,5 +76,10 @@ class Gallerys extends React.Component<any, any> {
     </Layout>
   }
 }
+const routerGallery = withRouter(Gallerys)
 
-export default withRouter(Gallerys)
+// const dynamicGallery = dynamic(() => import('.'), {
+//   ssr: false,
+// })
+
+export default routerGallery 

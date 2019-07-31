@@ -75,3 +75,17 @@ export interface Photo {
 export interface InsertRes {
     insertId: number
 }
+
+
+
+// -----
+
+export interface PhotoType {
+    type: string,
+    name: string,
+    key: string
+}
+export interface PhotoTypes {
+    [key: string]: PhotoType
+}
+export type Level = 0 | 1 | 2

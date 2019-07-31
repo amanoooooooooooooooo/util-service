@@ -2,11 +2,10 @@ import React from 'react'
 import Layout from '../../../../components/MyLayout'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
-import { PhotoTypes, LOCAL_PREFFIX } from '../../../../client/constant'
+import { LOCAL_PREFFIX } from '../../../../client/constant'
 import Fetch, { Result } from '../../../../Fetch';
 import { Photo } from '../../../../types';
 import { NextPageContext } from 'next';
-import { mValue } from '../../../../utils';
 
 class Gallery extends React.Component<any, any> {
   state: {
@@ -25,7 +24,7 @@ class Gallery extends React.Component<any, any> {
 
     const { query: { type, id } } = props
 
-    const res = await Fetch.get(endpoint + `/api/photo/${PhotoTypes[mValue(type)].type}/${id}`)
+    const res = await Fetch.get(endpoint + `/api/photo/${type}/${id}`)
 
     const { errMsg, payload }: Result<Photo[]> = res
     if (errMsg) {
