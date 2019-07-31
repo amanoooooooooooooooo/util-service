@@ -34,7 +34,7 @@ export async function insertOss(oss: OssRow) {
   const [result] = await pool.query(`INSERT INTO oss SET ?  `, [oss])
   return result
 }
-export async function insertUser(conn: any, user: UserRow): Promise<InsertRes> {
+export async function insertUser(conn: any, user: Partial<UserRow>): Promise<InsertRes> {
   const [result] = await conn.query(`INSERT INTO user SET ?  `, [user])
   return result
 }
@@ -54,7 +54,7 @@ export async function queryUserWithOption(conn: any, mail: string): Promise<User
   //@ts-ignore
   return camelcaseKeys(rows)
 }
-export async function updateUser(user: UserRow, id: number) {
+export async function updateUser(user: Partial<UserRow>, id: number) {
   const pool = await getPool()
 
   return pool.query(`UPDATE user SET ? WHERE id = ?`, [user, id])

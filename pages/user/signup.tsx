@@ -19,14 +19,14 @@ function Signup(props: any) {
   const _apply = async () => {
     const { nick, pass, mail } = user
 
-    const res = await Fetch.post('/spider/api/user', { nick, pass, mail })
+    const res = await Fetch.post('/api/user', { nick, pass, mail })
     const { errMsg, payload } = res
     if (errMsg) {
       alert(errMsg)
     } else {
       alert('成功')
       setUserStorage(payload)
-      props.router.push('/user/info')
+      props.router.replace('/user/info')
     }
   }
 

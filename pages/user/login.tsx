@@ -22,7 +22,7 @@ function Login(props: any) {
   const _login = async () => {
     const { nick, pass, mail } = user
 
-    const res = await Fetch.post('/spider/api/user/version', { nick, pass, mail })
+    const res = await Fetch.put('/api/user/login', { nick, pass, mail })
     const { errMsg, payload } = res
     if (errMsg) {
       alert(errMsg)

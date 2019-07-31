@@ -20,7 +20,7 @@ function Info(props: any) {
   const _apply = async () => {
     const { nick, pass, mail, id } = user
 
-    const res = await Fetch.put('/spider/api/user', { nick, pass, mail })
+    const res = await Fetch.put('/api/user', { nick, pass, mail })
     console.log('res ', res)
     const { errMsg, payload } = res
     if (errMsg) {
@@ -44,7 +44,7 @@ function Info(props: any) {
 
       try {
         (async function fetchUser() {
-          const { errMsg, payload: userInfo } = await Fetch.get(`/spider/api/user/${userId}`)
+          const { errMsg, payload: userInfo } = await Fetch.get(`/api/user/${userId}`)
           console.log('userifno1 ', userInfo)
           if (errMsg) {
             console.error('fetchUser errMsg ', errMsg)

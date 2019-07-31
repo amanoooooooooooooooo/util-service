@@ -29,7 +29,6 @@ export default async function oss(req: NextApiRequest, res: NextApiResponse) {
             try {
                 const rows = await dao.queryUserWithOption(conn, mail)
                 let userId: number = -1
-                console.log('rows', rows);
 
                 if (rows.length === 0) {
                     const res = await dao.insertUser(conn, userRow)

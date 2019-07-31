@@ -50,8 +50,8 @@ export interface NovelRow {
 export interface UserRow {
     id: number
     nick: string
-    mail: string
-    phone: string
+    mail?: string
+    phone?: string
     pass: string
 }
 export interface RssRow {
