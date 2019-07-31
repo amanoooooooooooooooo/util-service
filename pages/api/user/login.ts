@@ -32,6 +32,7 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse) {
                 } else {
                     const userRow = userRows[0]
                     if (md5(pass) === userRow.pass) {
+                        res.setHeader("Set-Cookie", 'vip=1;Path=/')
                         res.json(ResultUtil.success({ id: userRow.id, mail, nick: userRow.nick }))
                     } else {
                         res.json(ResultUtil.fail('密码不一致'))

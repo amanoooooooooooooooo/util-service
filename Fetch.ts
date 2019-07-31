@@ -46,6 +46,10 @@ enum Color {
     blue = 'color:blue',
     red = 'color:red'
 }
+
+type Credentials = 'include' | 'same-origin'
+const credentials: Credentials = 'same-origin'
+
 async function filter200Status(r: Response) {
     if (r.status !== 200) {
         const text = await r.text()
@@ -61,7 +65,7 @@ export default class Fetch {
 
         console.debug('__get__:', completeUrl)
 
-        const result = await fetch(completeUrl)
+        const result = await fetch(completeUrl, { credentials })
             .then(filter200Status)
             .catch(e => {
                 console.error('%c __get__:%s Error Cost %f ms', Color.red, completeUrl, cost(start), e)
@@ -79,10 +83,11 @@ export default class Fetch {
             method: 'POST',
             body: JSON.stringify(body),
             headers: commonHeaders(),
+            credentials
         }
         const result = await fetch(url, options)
             .then(filter200Status)
-            .catch(e => {
+            .catch((e: Error) => {
                 console.error('%c __post__:%s Error Cost %f ms', Color.red, url, cost(start), e)
                 throw e
             })
@@ -97,7 +102,8 @@ export default class Fetch {
         const options = {
             method: 'PUT',
             headers: commonHeaders(),
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials
         }
         const result = await fetch(url, options)
             .then(filter200Status)

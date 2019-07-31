@@ -45,7 +45,6 @@ function Info(props: any) {
       try {
         (async function fetchUser() {
           const { errMsg, payload: userInfo } = await Fetch.get(`/api/user/${userId}`)
-          console.log('userifno1 ', userInfo)
           if (errMsg) {
             console.error('fetchUser errMsg ', errMsg)
           } else {
