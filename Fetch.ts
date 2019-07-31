@@ -1,3 +1,6 @@
+import fetch from 'isomorphic-unfetch'
+
+
 export interface Result<T> {
     errMsg: string | null
     payload: T

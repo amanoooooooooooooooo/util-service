@@ -2,7 +2,12 @@ export const MAKR_LOGIN = 'mark.login'
 // export const LOCAL_PREFFIX = 'http://localhost:3000'
 export const LOCAL_PREFFIX = 'http://localhost:3000'
 
-export const PhotoTypes = {
+export const PhotoTypes: {
+  [key: string]: {
+    type: string,
+    name: string
+  }
+} = {
   pure: {
     type: 'PHOTO_PURE',
     name: '清纯唯美'

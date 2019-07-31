@@ -1,8 +1,8 @@
 import React from 'react'
-import Layout from '../components/MyLayout.js'
+import Layout from '../components/MyLayout'
 import Link from 'next/link'
 
-const Index = (props) => (
+const Index = () => (
   <Layout>
     <p>打印机(Printer)</p>
     <Link href={`/printer/headers`}>

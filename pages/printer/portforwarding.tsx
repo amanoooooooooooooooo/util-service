@@ -1,8 +1,8 @@
 import React from 'react'
-import Layout from '../../components/MyLayout.js'
+import Layout from '../../components/MyLayout'
 
 class PortForwarding extends React.Component {
-  render () {
+  render() {
     return <Layout>
       <h2>Expose Local Service To The Public(Deprecated)</h2>
       <h1>!! NOT MAINTAINED !! USE SSH PORT FORWARDING</h1>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../../components/MyLayout.js'
+import Layout from '../../components/MyLayout'
 
 import dynamic from 'next/dynamic'
 import Fetch from '../../Fetch';

@@ -1,9 +1,9 @@
-import Layout from '../../components/MyLayout.jsx'
+import Layout from '../../components/MyLayout'
 import React, { useState } from 'react'
-import FetchApi from '../../client/service.js'
 import { withRouter } from 'next/router'
-import { setUserStorage } from '../../utils.js';
-import { LocalUser } from '../../types.js';
+import { setUserStorage } from '../../utils';
+import { LocalUser } from '../../types';
+import Fetch from '../../Fetch';
 
 function Signup(props: any) {
 
@@ -19,7 +19,7 @@ function Signup(props: any) {
   const _apply = async () => {
     const { nick, pass, mail } = user
 
-    const res = await FetchApi.post('/spider/api/user', { nick, pass, mail })
+    const res = await Fetch.post('/spider/api/user', { nick, pass, mail })
     const { errMsg, payload } = res
     if (errMsg) {
       alert(errMsg)

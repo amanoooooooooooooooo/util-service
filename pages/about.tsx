@@ -1,4 +1,4 @@
-import Layout from '../components/MyLayout.js'
+import Layout from '../components/MyLayout'
 
 const About = () => {
   console.log('client about')
@@ -15,7 +15,7 @@ const About = () => {
   )
 }
 
-About.getInitialProps = async function (contex) {
+About.getInitialProps = async function () {
   console.log('server about')
 
   // return {

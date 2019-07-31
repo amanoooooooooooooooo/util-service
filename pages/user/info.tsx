@@ -2,13 +2,13 @@ import Layout from '../../components/MyLayout.jsx'
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'next/router'
 import Link from 'next/link'
-import { getUserStorage, setUserStorage } from '../../utils.js';
-import { LocalUser } from '../../types.js';
-import Fetch from '../../Fetch.js';
+import { LocalUser, Sub } from '../../types';
+import Fetch from '../../Fetch';
+import { getUserStorage, setUserStorage } from '../../utils';
 
 function Info(props: any) {
   const [user, setUser] = useState(getUserStorage())
-  const [rss, updateRss] = useState([])
+  const [rss, updateRss] = useState([] as Sub[])
 
   const updateValue = (e: any, type: string) => {
     const newUser = {

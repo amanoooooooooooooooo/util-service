@@ -6,6 +6,17 @@ export interface LocalUser {
     pass?: string
 }
 
+export interface Sub {
+    author: string | null
+    complete: number
+    crawlUrl: string
+    id: number
+    name: string
+    ossId: number
+    type: string
+    url: string
+    userId: number
+}
 
 export interface Oss {
     id: string
@@ -45,4 +56,9 @@ export interface UserRow {
 export interface RssRow {
     user_id: number
     oss_id: number
+}
+export interface Rss {
+    id: number
+    userId: number
+    ossId: number
 }

@@ -1,16 +1,18 @@
-import Layout from '../../components/MyLayout.jsx'
+import Layout from '../../components/MyLayout'
 import { withRouter } from 'next/router'
 import React, { useState } from 'react'
-import FetchApi from '../../client/service.js'
+import { LocalUser } from '../../types';
+import Fetch from '../../Fetch';
+import { setUserStorage } from '../../utils';
 
 function Login(props: any) {
   function _toSignup() {
     props.router.push('/user/signup')
   }
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({} as LocalUser)
 
-  const updateValue = (e, type) => {
+  const updateValue = (e: any, type: string) => {
     const newUser = {
       ...user,
       [type]: e.target.value
@@ -20,7 +22,7 @@ function Login(props: any) {
   const _login = async () => {
     const { nick, pass, mail } = user
 
-    const res = await FetchApi.post('/spider/api/user/version', { nick, pass, mail })
+    const res = await Fetch.post('/spider/api/user/version', { nick, pass, mail })
     const { errMsg, payload } = res
     if (errMsg) {
       alert(errMsg)

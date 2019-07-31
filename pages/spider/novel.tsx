@@ -1,11 +1,10 @@
 
 import React from 'react'
-import Layout from '../../components/MyLayout.js'
+import Layout from '../../components/MyLayout'
 import Link from 'next/link'
-import Fetch from '../../client/service.js'
-import { LOCAL_PREFFIX } from '../../client/constant.js'
-import { Result } from '../../Fetch.js';
-import { OssRow } from '../../types.js';
+import { LOCAL_PREFFIX } from '../../client/constant'
+import Fetch, { Result } from '../../Fetch';
+import { OssRow } from '../../types';
 
 export default class Novel extends React.Component {
     static async getInitialProps(props: any) {

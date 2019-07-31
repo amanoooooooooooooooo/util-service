@@ -1,10 +1,9 @@
 import React, { CSSProperties } from 'react'
-import Layout from '../../../components/MyLayout.js'
+import Layout from '../../../components/MyLayout'
 import Link from 'next/link'
-import Fetch from '../../../client/service.js'
 import { MAKR_LOGIN, LOCAL_PREFFIX } from '../../../client/constant'
 import { NextPageContext } from 'next';
-import { Result } from '../../../Fetch.js';
+import Fetch, { Result } from '../../../Fetch';
 import { Novel, LocalUser } from '../../../types';
 import { withRouter } from 'next/router'
 

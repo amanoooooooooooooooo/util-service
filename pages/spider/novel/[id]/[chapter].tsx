@@ -1,10 +1,10 @@
 import React from 'react'
-import Layout from '../../../../components/MyLayout.js'
+import Layout from '../../../../components/MyLayout'
 import Link from 'next/link'
 import { LOCAL_PREFFIX } from '../../../../client/constant'
 import { NextPageContext } from 'next';
 import { Novel } from '../../../../types';
-import Fetch from '../../../../client/service.js';
+import Fetch from '../../../../Fetch';
 
 
 class Chapter extends React.Component<any, any> {
