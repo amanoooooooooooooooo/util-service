@@ -48,6 +48,7 @@ export interface NovelRow {
     nextCrawl_url: string
 }
 export interface UserRow {
+    id: number
     nick: string
     mail: string
     phone: string
@@ -69,4 +70,8 @@ export interface Photo {
     crawlUrl: string
     index: number
     title: string
+}
+
+export interface InsertRes {
+    insertId: number
 }

@@ -82,7 +82,7 @@ class Chapters extends React.Component<any, any> {
       return
     }
 
-    const { errMsg } = await Fetch.post('/spider/api/sub', { mail, id })
+    const { errMsg } = await Fetch.post('/api/rss', { mail, id })
     if (errMsg) {
       alert(errMsg)
     } else {

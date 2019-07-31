@@ -1,6 +1,7 @@
 import { getPool } from './mysql'
 import camelcaseKeys from 'camelcase-keys';
-import { OssRow, UserRow, RssRow, Novel } from '../types';
+import { OssRow, UserRow, RssRow, Novel, InsertRes } from '../types';
+
 
 export async function queryOssRows(type = 'NOVEL', pageSize: number, pageNum: number) {
   const from = (pageNum - 1) * pageSize
@@ -27,7 +28,7 @@ export async function insertOss(oss: OssRow) {
   const [result] = await getPool().query(`INSERT INTO oss SET ?  `, [oss])
   return result
 }
-export async function insertUser(conn: any, user: UserRow) {
+export async function insertUser(conn: any, user: UserRow): Promise<InsertRes> {
   const [result] = await conn.query(`INSERT INTO user SET ?  `, [user])
   return result
 }
@@ -40,8 +41,9 @@ export async function queryOssWithOption(name: string, crawlUrl: string) {
   const [rows] = await getPool().query(`SELECT * FROM oss where name = ? ${suffix}`, [name])
   return camelcaseKeys(rows)
 }
-export async function queryUserWithOption(conn: any, mail: string) {
+export async function queryUserWithOption(conn: any, mail: string): Promise<UserRow[]> {
   const [rows] = await conn.query(`SELECT * FROM user where mail = ? `, [mail])
+  //@ts-ignore
   return camelcaseKeys(rows)
 }
 export async function updateUser(user: UserRow, id: number) {

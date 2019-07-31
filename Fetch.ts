@@ -14,7 +14,7 @@ export class ResultUtil {
         }
     }
 
-    static success(payload: any) {
+    static success(payload?: any) {
         return ResultUtil.send(null, payload)
     }
     static fail(errMsg = 'DEFAULT ERROR') {
