@@ -35,31 +35,31 @@ const Index = () => (
     <br />
 
     <p>作品集(Collection)</p>
-    <Link href={`/static/2048/index.html`}>
+    <Link href={`/static/2048/index.html`} prefetch={false}>
       <a>2048</a>
     </Link>
     <br />
-    <Link href={`/static/handwrite/index.html`}>
+    <Link href={`/static/handwrite/index.html`} prefetch={false} >
       <a>handwrite</a>
     </Link>
     <br />
-    <Link href={`/static/wow/index.html`}>
+    <Link href={`/static/wow/index.html`} prefetch={false}>
       <a>wow</a>
     </Link>
     <br />
-    <Link href={`/static/countdown/index.html`}>
+    <Link href={`/static/countdown/index.html`} prefetch={false}>
       <a>count down</a>
     </Link>
     {/* <br />
     <Link href={`/static/3dshow/index.html`}>
       <a>3d show</a>
-    </Link> */}
-    {/* <br />
+    </Link>
+    <br />
     <Link href={`/static/bgtranslation/index.html`}>
       <a>bg translation</a>
     </Link> */}
 
-  </Layout>
+  </Layout >
 )
 
 // Index.getInitialProps = async function () {

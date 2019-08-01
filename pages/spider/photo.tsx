@@ -52,7 +52,7 @@ class Photo extends React.Component<any, any> {
         {Object.keys(this.state.photoTypes).map(item => {
 
           return <div key={item}>
-            <Link href={`/spider/photo/${item}`}>
+            <Link href={`/spider/photo/${item}`} prefetch={false}>
               <a>{this.state.photoTypes[item].name}</a>
             </Link>
           </div>

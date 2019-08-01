@@ -62,7 +62,7 @@ class Gallerys extends React.Component<any, any> {
         {gallerys.map(item => {
           const { id, name, createTime } = item
           return <div key={id} className="flex">
-            <Link href={`/spider/photo/${type}/${id}`}>
+            <Link href={`/spider/photo/${type}/${id}`} prefetch={false}>
               <a>{name}</a>
             </Link>
             <span>{createTime}</span>

@@ -104,7 +104,7 @@ class Chapters extends React.Component<any, any> {
         {_chapters.length === 0 && <div>还没有找到章节</div>}
         {_chapters.map(item => {
           return <div key={item.chapterIndex}>
-            <Link href={`/spider/novel/${id}/${item.chapterIndex}`}>
+            <Link href={`/spider/novel/${id}/${item.chapterIndex}`} prefetch={false}>
               <a>{item.chapterTitle}</a>
             </Link>
           </div>

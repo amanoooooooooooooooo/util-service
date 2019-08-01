@@ -100,7 +100,7 @@ export default class Novel extends React.Component {
                 <h2>已爬取的小说</h2>
                 {novels.filter(item => item.name.indexOf(filter) !== -1).map(item => {
                     return <div key={item.id}>
-                        <Link href={`/spider/novel/${item.id}`}>
+                        <Link href={`/spider/novel/${item.id}`} prefetch={false}>
                             <a>{item.name}</a>
                         </Link>
                     </div>
