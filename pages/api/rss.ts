@@ -6,11 +6,12 @@ import { UserRow } from "../../types";
 
 
 export default async function oss(req: NextApiRequest, res: NextApiResponse) {
-    console.log('oss api');
 
     switch (req.method) {
-        case 'GET':
-            res.json(ResultUtil.fail('get '))
+        case 'DELETE':
+            const { id } = req.body
+            const result = await dao.deleteRss(id)
+            res.json(ResultUtil.success(result))
             break;
         case 'POST':
             const { mail, nick, id: ossId } = req.body
@@ -38,7 +39,7 @@ export default async function oss(req: NextApiRequest, res: NextApiResponse) {
                     userId = rows[0].id
                 }
                 console.log('userId ', userId)
-                console.log('ossId ', userId)
+                console.log('ossId ', ossId)
 
                 const rssRow = {
                     user_id: userId,

@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-unfetch'
 
-console.debug = () => { }
+if (process.env.NODE_ENV === 'production') {
+    console.debug = () => { }
+}
 
 export interface Result<T> {
     errMsg: string | null
@@ -112,6 +114,26 @@ export default class Fetch {
                 throw e
             })
         console.debug('%c __put__: %s Success Cost %f ms res: %o', Color.blue, url, cost(start), result)
+
+        return result
+    }
+    public static async delete(url: string, body: any = {}): Promise<any> {
+        const start = new Date()
+        console.debug('__delete__:', url)
+
+        const options = {
+            method: 'DELETE',
+            headers: commonHeaders(),
+            body: JSON.stringify(body),
+            credentials
+        }
+        const result = await fetch(url, options)
+            .then(filter200Status)
+            .catch(e => {
+                console.error('%c __delete__:%s Error Cost %f ms', Color.red, url, cost(start), e)
+                throw e
+            })
+        console.debug('%c __delete__: %s Success Cost %f ms res: %o', Color.blue, url, cost(start), result)
 
         return result
     }

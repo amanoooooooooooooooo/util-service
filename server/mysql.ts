@@ -1,5 +1,5 @@
 import { ClientChannel } from "ssh2";
-
+// @ts-ignore
 import mysql from 'mysql2/promise'
 
 const {

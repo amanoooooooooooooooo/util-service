@@ -50,7 +50,6 @@ class Photo extends React.Component<any, any> {
       <div style={{ position: 'relative' }}>
         <h2>已爬取的图片</h2>
         {Object.keys(this.state.photoTypes).map(item => {
-          console.log('item', item);
 
           return <div key={item}>
             <Link href={`/spider/photo/${item}`}>

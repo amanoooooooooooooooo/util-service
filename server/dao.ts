@@ -62,12 +62,17 @@ export async function updateUser(user: Partial<UserRow>, id: number) {
 export async function queryOssInRss(userId: number) {
   const pool = await getPool()
 
-  const [rows] = await pool.query(`SELECT * FROM rss LEFT JOIN oss ON rss.oss_id = oss.id WHERE  user_id = ?`, [userId])
+  const [rows] = await pool.query(`SELECT * FROM oss RIGHT JOIN rss ON rss.oss_id = oss.id WHERE user_id = ?`, [userId])
   return camelcaseKeys(rows)
 }
 export async function queryPhotoRows(ossId: number) {
   const pool = await getPool()
   const [rows] = await pool.query('SELECT * FROM photo WHERE oss_id = ? ', [ossId])
+  return camelcaseKeys(rows)
+}
+export async function deleteRss(id: number): Promise<any> {
+  const pool = await getPool()
+  const [rows] = await pool.query('DELETE FROM rss WHERE id = ? ', [id])
   return camelcaseKeys(rows)
 }
 

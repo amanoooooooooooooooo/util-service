@@ -4,7 +4,7 @@ import { withRouter } from 'next/router'
 import Link from 'next/link'
 import { LocalUser, Sub } from '../../types';
 import Fetch from '../../Fetch';
-import { getUserStorage, setUserStorage } from '../../utils';
+import { getUserStorage, setUserStorage, delCookie } from '../../utils';
 
 function Info(props: any) {
   const [user, setUser] = useState(getUserStorage())
@@ -34,23 +34,28 @@ function Info(props: any) {
   const _logout = async () => {
     setUserStorage({})
     setUser(getUserStorage())
+    delCookie('vip', '/')
     props.router.push('/user/login')
   }
+  const _delRss = async (id: number) => {
+    await Fetch.delete('/api/rss', { id })
+    await fetchUser()
+  }
 
+  async function fetchUser() {
+    const { errMsg, payload: userInfo } = await Fetch.get(`/api/user/${user.id}`)
+    if (errMsg) {
+      console.error('fetchUser errMsg ', errMsg)
+    } else {
+      updateRss(userInfo)
+    }
+  }
   useEffect(() => {
     const userId = user.id
     if (userId) {
       console.log('userId', userId)
-
       try {
-        (async function fetchUser() {
-          const { errMsg, payload: userInfo } = await Fetch.get(`/api/user/${userId}`)
-          if (errMsg) {
-            console.error('fetchUser errMsg ', errMsg)
-          } else {
-            updateRss(userInfo)
-          }
-        })()
+        fetchUser()
       } catch (error) {
         console.error('fetch user e', error)
       }
@@ -83,9 +88,13 @@ function Info(props: any) {
 
       {rss.map(item => {
         return <div key={item.id} >
-          <Link href={`/spider/novel/${item.ossId}`}>
-            <a>{item.name}</a>
-          </Link>
+          <div className="flex">
+            <Link href={`/spider/novel/${item.ossId}`}>
+              <a>{item.name}</a>
+            </Link>
+            <div onClick={() => _delRss(item.id)} >删除</div>
+          </div>
+
         </div>
       })}
 

@@ -8,7 +8,7 @@
     "dev": "next",
     "dev2": "npx nodemon server/index.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server",
+    "start": "NODE_ENV=production next start",
     "start2": "next build && NODE_ENV=production next start",
     "export": "next export"
   },
@@ -40,7 +40,6 @@
     "ws": "^7.0.1"
   },
   "devDependencies": {
-    "@types/mysql2": "types/mysql2",
     "@types/node": "^12.6.8",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.5",

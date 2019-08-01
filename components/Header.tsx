@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getUserStorage } from '../utils';
+import { NextPageContext } from 'next';
 
 
 const linkStyle = {
@@ -8,6 +9,7 @@ const linkStyle = {
 
 const Header = () => {
   const { mail } = getUserStorage()
+
   const userHref = mail ? '/user/info' : '/user/login'
   return (
     <div>
