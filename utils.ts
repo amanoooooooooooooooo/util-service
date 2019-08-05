@@ -16,6 +16,13 @@ export function getUserStorage(): LocalUser {
 export function setUserStorage(user: LocalUser) {
   localStorage.setItem(MAKR_LOGIN, JSON.stringify(user))
 }
+export function getColorStorage(key: string): string | undefined | null | false {
+  const color = (typeof localStorage !== 'undefined') && localStorage.getItem(key)
+  return color
+}
+export function setColorStorage(key: string, color: string) {
+  localStorage.setItem(key, color)
+}
 
 export function mParseInt(x: string | string[]) {
   return parseInt(mValue(x))

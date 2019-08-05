@@ -13,10 +13,10 @@ const Layout = (props: any) => (
     <NextHead>
       <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1' />
     </NextHead>
-    < NextHead >
+    <NextHead >
       <meta httpEquiv='Content-Type' content='application/xhtml+xml;charset=utf-8' />
     </NextHead>
-    < style jsx global > {`
+    <style jsx global > {`
       html,body { 
         height:100%;
         margin:0;
@@ -50,7 +50,7 @@ const Layout = (props: any) => (
       }
 
     `}</style>
-    < Header />
+    <Header />
     <hr />
     {props.children}
   </div>

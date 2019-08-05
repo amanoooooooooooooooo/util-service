@@ -19,6 +19,9 @@ const Header = () => {
       <Link href={userHref}>
         <a style={linkStyle}>User</a>
       </Link>
+      <Link href='/setting'>
+        <a style={linkStyle}>Setting</a>
+      </Link>
       <Link href='/about'>
         <a style={linkStyle}>About</a>
       </Link>
