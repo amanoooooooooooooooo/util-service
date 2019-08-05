@@ -5,19 +5,19 @@ import Link from 'next/link'
 const Index = () => (
   <Layout>
     <p>打印机(Printer)</p>
-    <Link href={`/printer/headers`}>
+    <Link href={`/printer/headers`} prefetch={false}>
       <a>请求头(Request Header)</a>
     </Link>
     <br />
-    <Link href={`/printer/position`}>
+    <Link href={`/printer/position`} prefetch={false}>
       <a>地址(Geolocation)</a>
     </Link>
     <br />
-    <Link href={`/printer/dns`}>
+    <Link href={`/printer/dns`} prefetch={false}>
       <a>域名解析(Dns)</a>
     </Link>
     <br />
-    <Link href={`/printer/portforwarding`}>
+    <Link href={`/printer/portforwarding`} prefetch={false}>
       <a>端口转发(Port Forwarding)</a>
     </Link>
     <br />
