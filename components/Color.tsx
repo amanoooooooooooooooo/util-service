@@ -75,3 +75,4 @@ Color.getInitialProps = function (props: NextPageContext) {
 }
 
 export default Color
+
