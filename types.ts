@@ -76,6 +76,14 @@ export interface InsertRes {
     insertId: number
 }
 
+export interface Value {
+    key: string
+    value: string
+    version: number
+    createTime: string,
+    updateTime: string
+}
+
 
 
 // -----

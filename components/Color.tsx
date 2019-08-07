@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { BlockPicker, GithubPicker, ColorResult, TwitterPicker } from 'react-color';
-import { getColorStorage, setColorStorage } from '../utils';
+import { getStorage, setStorage } from '../utils';
 import { NextPageContext, NextPage } from 'next';
+import { LOCAL } from '../client/constant';
 
 function Color(props: any) {
-    const fontColor = getColorStorage('color.font') || 'black'
-    const bgColor = getColorStorage('color.bg') || 'white'
+    const fontColor = getStorage(LOCAL.COLOR_FONT) || 'black'
+    const bgColor = getStorage(LOCAL.COLOR_BG) || 'white'
 
     const [font, setFont] = useState({ color: fontColor, show: false })
     const [bg, setBg] = useState({ color: bgColor, show: false })
@@ -35,14 +36,14 @@ function Color(props: any) {
         }
     }
     function _reset() {
-        setColorStorage('color.font', "")
-        setColorStorage('color.bg', "")
+        setStorage(LOCAL.COLOR_FONT, "")
+        setStorage(LOCAL.COLOR_BG, "")
         setFont({ ...font, color: 'black' })
         setBg({ ...bg, color: 'white' })
     }
     function _save() {
-        setColorStorage('color.font', font.color)
-        setColorStorage('color.bg', bg.color)
+        setStorage(LOCAL.COLOR_FONT, font.color)
+        setStorage(LOCAL.COLOR_BG, bg.color)
         setFont({ ...font, show: false })
         setBg({ ...bg, show: false })
     }

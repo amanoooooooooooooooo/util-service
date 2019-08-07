@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import Layout from '../../../components/MyLayout'
 import Link from 'next/link'
-import { MAKR_LOGIN, LOCAL_PREFFIX } from '../../../client/constant'
+import { LOCAL_PREFFIX, LOCAL } from '../../../client/constant'
 import { NextPageContext } from 'next';
 import Fetch, { Result } from '../../../Fetch';
 import { Novel, LocalUser } from '../../../types';
@@ -46,7 +46,7 @@ class Chapters extends React.Component<any, any> {
   }
   _updateMail() {
     try {
-      const userString = localStorage.getItem(MAKR_LOGIN) as string
+      const userString = localStorage.getItem(LOCAL.MARK_LOGIN) as string
       const user: LocalUser = JSON.parse(userString) || {}
       const { mail } = user
       if (this.mail && mail) {
@@ -87,7 +87,7 @@ class Chapters extends React.Component<any, any> {
       alert(errMsg)
     } else {
       alert('成功')
-      localStorage.setItem(MAKR_LOGIN, JSON.stringify({ mail }))
+      localStorage.setItem(LOCAL.MARK_LOGIN, JSON.stringify({ mail }))
     }
   }
 

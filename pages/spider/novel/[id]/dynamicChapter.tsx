@@ -3,8 +3,9 @@ import Layout from '../../../../components/MyLayout'
 import Link from 'next/link'
 import { Novel } from '../../../../types';
 import Fetch from '../../../../Fetch';
-import { getColorStorage } from '../../../../utils';
+import { getStorage } from '../../../../utils';
 import { withRouter } from 'next/router';
+import { LOCAL } from '../../../../client/constant';
 
 class Chapter extends React.Component<any, any> {
 
@@ -26,8 +27,8 @@ class Chapter extends React.Component<any, any> {
     componentWillMount() {
         this._query()
 
-        const fontColor = getColorStorage('color.font') || 'black'
-        const bgColor = getColorStorage('color.bg') || 'white'
+        const fontColor = getStorage(LOCAL.COLOR_FONT) || 'black'
+        const bgColor = getStorage(LOCAL.COLOR_BG) || 'white'
         this.fontColor = fontColor
         this.bgColor = bgColor
 

@@ -3,12 +3,13 @@ import * as dao from '../../../server/dao'
 import { ResultUtil } from "../../../Fetch";
 import { mParseInt, mValue } from '../../../utils'
 import { Level } from "../../../types";
+import { LOCAL } from "../../../client/constant";
 
 
 export default async function PhotoType(req: NextApiRequest, res: NextApiResponse) {
     const { type, pageSize, pageNum } = req.query
 
-    const level = parseInt(req.cookies.vip || '0') as Level
+    const level = parseInt(req.cookies[LOCAL.MARK_LOGIN] || '0') as Level
 
     const types = dao.queryPhotoTypes(level)
 

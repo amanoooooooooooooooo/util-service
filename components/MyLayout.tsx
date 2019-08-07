@@ -1,5 +1,6 @@
 import Header from './Header'
 import NextHead from 'next/head'
+import Bg from './Bg';
 
 const layoutStyle = {
   margin: 16,
@@ -51,6 +52,7 @@ const Layout = (props: any) => (
 
     `}</style>
     <Header />
+    <Bg />
     <hr />
     {props.children}
   </div>

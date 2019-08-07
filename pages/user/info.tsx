@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { LocalUser, Sub } from '../../types';
 import Fetch from '../../Fetch';
 import { getUserStorage, setUserStorage, delCookie } from '../../utils';
+import { LOCAL } from '../../client/constant';
 
 function Info(props: any) {
   const [user, setUser] = useState(getUserStorage())
@@ -34,7 +35,7 @@ function Info(props: any) {
   const _logout = async () => {
     setUserStorage({})
     setUser(getUserStorage())
-    delCookie('vip', '/')
+    delCookie(LOCAL.MARK_LOGIN, '/')
     props.router.push('/user/login')
   }
   const _delRss = async (id: number) => {

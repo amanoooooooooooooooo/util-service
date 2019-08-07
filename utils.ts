@@ -1,10 +1,10 @@
-import { MAKR_LOGIN } from "./client/constant";
 import { LocalUser } from "./types";
+import { LOCAL } from "./client/constant";
 
 
 
 export function getUserStorage(): LocalUser {
-  const userString = (typeof localStorage !== 'undefined') && localStorage.getItem(MAKR_LOGIN)
+  const userString = (typeof localStorage !== 'undefined') && localStorage.getItem(LOCAL.MARK_LOGIN)
   let user = {}
   try {
     user = JSON.parse(userString as string) || {}
@@ -14,13 +14,13 @@ export function getUserStorage(): LocalUser {
   return user
 }
 export function setUserStorage(user: LocalUser) {
-  localStorage.setItem(MAKR_LOGIN, JSON.stringify(user))
+  localStorage.setItem(LOCAL.MARK_LOGIN, JSON.stringify(user))
 }
-export function getColorStorage(key: string): string | undefined | null | false {
+export function getStorage(key: string): string | undefined | null | false {
   const color = (typeof localStorage !== 'undefined') && localStorage.getItem(key)
   return color
 }
-export function setColorStorage(key: string, color: string) {
+export function setStorage(key: string, color: string) {
   localStorage.setItem(key, color)
 }
 
@@ -34,7 +34,6 @@ export function mValue(x: string | string[]) {
 export function getCookie(name: string) {
   const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   const arr = document.cookie.match(reg)
-  console.log('arr', arr);
 
   if (arr)
     return unescape(arr[2]);

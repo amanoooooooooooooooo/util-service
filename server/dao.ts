@@ -1,6 +1,6 @@
 import { getPool } from './mysql'
 import camelcaseKeys from 'camelcase-keys';
-import { OssRow, UserRow, RssRow, Novel, InsertRes, PhotoTypes, Level } from '../types';
+import { OssRow, UserRow, RssRow, Novel, InsertRes, PhotoTypes, Level, Value } from '../types';
 
 
 export async function queryOssRows(type = 'NOVEL', pageSize: number, pageNum: number) {
@@ -75,6 +75,26 @@ export async function deleteRss(id: number): Promise<any> {
   const [rows] = await pool.query('DELETE FROM rss WHERE id = ? ', [id])
   return camelcaseKeys(rows)
 }
+
+export const getValue = async (key: string): Promise<Value | null> => {
+  const pool = await getPool()
+  const [rows] = await pool.query('SELECT * FROM key_value WHERE `key` = ? ORDER BY version DESC LIMIT 1', [key])
+  //@ts-ignore
+  return rows[0] ? camelcaseKeys(rows[0]) : null
+}
+export const setValue = async (key: string, value: string, version?: number) => {
+  const suffix = version ? ', version = ' + version : ''
+  const pool = await getPool()
+  const [rows] = await pool.query(`UPDATE key_value SET value = ? ${suffix} WHERE \`key\` = ? ORDER BY id DESC LIMIT 1`, [value, key])
+  return rows
+}
+export const addValue = async (key: string, value: string, version: number = 1) => {
+  const pool = await getPool()
+  const [rows] = await pool.query('INSERT key_value SET  ? ', [{ key, value, version }])
+  return rows
+}
+
+
 
 
 export function queryPhotoTypes(level: Level) {

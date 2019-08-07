@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import * as dao from '../../../server/dao'
 import { ResultUtil } from "../../../Fetch";
 import { buildCookie } from '../../../utils'
-import { MAIL_PATTERN } from "../../../client/constant";
+import { MAIL_PATTERN, LOCAL } from "../../../client/constant";
 import { getPool } from "../../../server/mysql";
 const crypto = require('crypto')
 
@@ -31,7 +31,7 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse) {
                 } else {
                     const userRow = userRows[0]
                     if (md5(pass) === userRow.pass) {
-                        res.setHeader("Set-Cookie", buildCookie('vip', '1', undefined, '/'))
+                        res.setHeader("Set-Cookie", buildCookie(LOCAL.MARK_LOGIN, '1', undefined, '/'))
                         res.json(ResultUtil.success({ id: userRow.id, mail, nick: userRow.nick }))
                     } else {
                         res.json(ResultUtil.fail('密码不一致'))

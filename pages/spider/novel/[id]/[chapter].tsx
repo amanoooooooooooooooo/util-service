@@ -16,7 +16,7 @@ export default Chapter
 // import { NextPageContext } from 'next';
 // import { Novel } from '../../../../types';
 // import Fetch from '../../../../Fetch';
-// import { getColorStorage } from '../../../../utils';
+// import { getStorage } from '../../../../utils';
 // import { withRouter } from 'next/router';
 
 // class Chapter extends React.Component<any, any> {
@@ -76,8 +76,8 @@ export default Chapter
 //   render() {
 //     console.log('render life');
 
-//     const fontColor = getColorStorage('color.font') || 'black'
-//     const bgColor = getColorStorage('color.bg') || 'white'
+//     const fontColor = getStorage('color.font') || 'black'
+//     const bgColor = getStorage('color.bg') || 'white'
 //     console.log('chapter fontColor', fontColor);
 //     console.log('chapter bgColor', bgColor);
 //     this.fontColor = fontColor
