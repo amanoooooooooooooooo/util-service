@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/MyLayout'
-import Fetch from '../../Fetch'
 import dynamic from 'next/dynamic'
+import Fetch from '@amanooo/fetch'
 const DynamicReactJson = dynamic(import('react-json-view'), { ssr: false })
 
 class Header extends React.Component {
@@ -12,6 +12,8 @@ class Header extends React.Component {
   async componentDidMount() {
     const res = await Fetch.get('/api/headers')
     // const res = await fetch('/api/headers').then(res => res.json())
+    console.log('res', res);
+
     this.setState({
       data: res
     })
