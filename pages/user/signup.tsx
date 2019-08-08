@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { withRouter } from 'next/router'
 import { setUserStorage } from '../../utils';
 import { LocalUser } from '../../types';
-import Fetch from '../../Fetch';
+import Fetch from '@amanooo/fetch';
 
 function Signup(props: any) {
 

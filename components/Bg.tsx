@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getCookie, getUserStorage, getStorage, setCookie, setStorage } from "../utils";
 import { LOCAL } from "../client/constant";
-import Fetch from "../Fetch";
+import Fetch from "@amanooo/fetch";
 
 function Bg() {
     async function visit() {

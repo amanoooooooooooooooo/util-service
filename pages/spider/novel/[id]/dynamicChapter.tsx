@@ -2,10 +2,10 @@ import React from 'react'
 import Layout from '../../../../components/MyLayout'
 import Link from 'next/link'
 import { Novel } from '../../../../types';
-import Fetch from '../../../../Fetch';
 import { getStorage } from '../../../../utils';
 import { withRouter } from 'next/router';
 import { LOCAL } from '../../../../client/constant';
+import Fetch from '@amanooo/fetch';
 
 class Chapter extends React.Component<any, any> {
 

@@ -3,9 +3,10 @@ import Layout from '../../../components/MyLayout'
 import Link from 'next/link'
 import { LOCAL_PREFFIX, LOCAL } from '../../../client/constant'
 import { NextPageContext } from 'next';
-import Fetch, { Result } from '../../../Fetch';
+import { Result } from '../../../Fetch';
 import { Novel, LocalUser } from '../../../types';
 import { withRouter } from 'next/router'
+import Fetch from '@amanooo/fetch';
 
 const MAIL_PATTERN = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
 

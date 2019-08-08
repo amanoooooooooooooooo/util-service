@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@alicloud/pop-core": "^1.7.6",
-    "@amanooo/fetch": "./fetch",
+    "@amanooo/fetch": "^1.0.1",
     "babel-eslint": "^10.0.1",
     "bluebird": "^3.5.5",
     "camelcase-keys": "^6.0.0",

@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../../components/MyLayout'
 
 import dynamic from 'next/dynamic'
-import Fetch from '../../Fetch';
+import Fetch from '@amanooo/fetch';
 
 const DynamicReactJson = dynamic(import('react-json-view'), { ssr: false })
 

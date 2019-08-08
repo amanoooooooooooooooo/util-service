@@ -3,9 +3,10 @@ import Layout from '../../../../components/MyLayout'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { LOCAL_PREFFIX } from '../../../../client/constant'
-import Fetch, { Result } from '../../../../Fetch';
+import { Result } from '../../../../Fetch';
 import { Photo } from '../../../../types';
 import { NextPageContext } from 'next';
+import Fetch from '@amanooo/fetch';
 
 class Gallery extends React.Component<any, any> {
   state: {

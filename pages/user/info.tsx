@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'next/router'
 import Link from 'next/link'
 import { LocalUser, Sub } from '../../types';
-import Fetch from '../../Fetch';
 import { getUserStorage, setUserStorage, delCookie } from '../../utils';
 import { LOCAL } from '../../client/constant';
+import Fetch from '@amanooo/fetch';
 
 function Info(props: any) {
   const [user, setUser] = useState(getUserStorage())

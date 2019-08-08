@@ -44,9 +44,7 @@ export function getCookie(name: string) {
 export function delCookie(name: string, path?: string) {
   const cval = getCookie(name);
 
-  console.log('getCookie %s cval', name, cval);
-  console.log('path ', path);
-
+  console.log('getCookie %s val', name, cval);
 
   if (cval != null)
     document.cookie = `${generateCookie({ [name]: escape(cval), expires: getExpire('s-1'), path })}`
@@ -88,8 +86,6 @@ function getsec(str: string): number {
 function getExpire(interval?: string) {
   if (!interval) return undefined
   const exp = new Date();
-  console.log('exp', exp);
-  console.log('getsec(interval)', getsec(interval));
 
   exp.setTime(exp.getTime() + getsec(interval));
   console.log('exp2', exp);

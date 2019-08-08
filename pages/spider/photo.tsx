@@ -1,8 +1,8 @@
 import React from 'react'
 import Layout from '../../components/MyLayout'
 import Link from 'next/link'
-import Fetch from '../../Fetch';
 import { PhotoTypes } from '../../types';
+import Fetch from '@amanooo/fetch';
 
 class Photo extends React.Component<any, any> {
   // static async getInitialProps(props: NextPageContext) {

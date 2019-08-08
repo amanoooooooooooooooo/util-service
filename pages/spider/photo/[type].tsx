@@ -2,9 +2,10 @@ import React from 'react'
 import Layout from '../../../components/MyLayout'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
-import Fetch, { Result } from '../../../Fetch';
+import { Result } from '../../../Fetch';
 import { Oss } from '../../../types';
 import { NextPageContext } from 'next';
+import Fetch from '@amanooo/fetch';
 
 
 class Gallerys extends React.Component<any, any> {

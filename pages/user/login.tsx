@@ -2,8 +2,8 @@ import Layout from '../../components/MyLayout'
 import { withRouter } from 'next/router'
 import React, { useState } from 'react'
 import { LocalUser } from '../../types';
-import Fetch from '../../Fetch';
 import { setUserStorage } from '../../utils';
+import Fetch from '@amanooo/fetch';
 
 function Login(props: any) {
   function _toSignup() {

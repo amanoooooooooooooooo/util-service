@@ -8,7 +8,7 @@ export enum LOCAL {
     COLOR_BG = 'color.bg',
     MARK_VISIT = 'mark.visit',
     MARK_LOGIN = 'mark.login',
-    MODE_DEV = 'd'
+    MODE_DEV = 'model.dev'
 }
 export enum SERVER {
     VISIT_TOTAL = 'visit.total'
