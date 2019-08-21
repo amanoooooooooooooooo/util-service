@@ -64,10 +64,10 @@ class Dns extends React.Component {
       alert('ip should not be null')
       return
     }
-    const body = JSON.stringify({
+    const body = {
       RR: domain,
       value: ip
-    })
+    }
     const r = await Fetch.post('/api/dns', body)
     const {
       code = 'success'

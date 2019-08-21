@@ -15,7 +15,7 @@ const Client = (secretId?: string, secertKey?: string) => new Core({
 export default async function dns(req: NextApiRequest, res: NextApiResponse) {
     // @ts-ignore
     const { secretId, secertKey, domainName = 'util.online', RR, type = 'A', value } = req.body || {}
-    console.log('req', req.body);
+    console.log('req', req.body, typeof req.body);
     console.log('RR  ', RR);
     console.log('value  ', value);
 
