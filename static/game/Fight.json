@@ -1,0 +1,1 @@
+{"type":"Scene","props":{"width":200,"height":200},"compId":2,"child":[{"type":"TextInput","props":{"y":59,"x":32,"text":"TextInput","skin":"comp/textinput.png"},"compId":4}],"loadList":["comp/textinput.png"],"loadList3D":[]}

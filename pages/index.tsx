@@ -50,6 +50,12 @@ const Index = () => (
     <Link href={`/static/countdown/index.html`} prefetch={false}>
       <a>count down</a>
     </Link>
+    <br />
+    <br />
+
+    <Link href={`/static/game/index.html`} prefetch={false}>
+      <a>game</a>
+    </Link>
     {/* <br />
     <Link href={`/static/3dshow/index.html`}>
       <a>3d show</a>
