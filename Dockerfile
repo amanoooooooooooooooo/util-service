@@ -1,6 +1,6 @@
 #
 # ---- Base Node ----
-FROM node:11-slim
+FROM node:11-stretch-slim
 
 WORKDIR /util
 
