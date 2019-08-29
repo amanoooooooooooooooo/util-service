@@ -11,7 +11,7 @@ services:
 # -
 
 script:
-- pwd
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
 - docker build -t amanohikaru/util-service .
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - docker push amanohikaru/util-service
