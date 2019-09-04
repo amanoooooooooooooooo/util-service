@@ -1,5 +1,6 @@
 
-FROM node:11-stretch-slim
+# FROM node:11-stretch-slim
+FROM balenalib/generic-armv7ahf-alpine-node:11-edge-run
 
 WORKDIR /util
 
