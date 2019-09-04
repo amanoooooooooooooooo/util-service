@@ -12,8 +12,8 @@ services:
 
 script:
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-- docker build -t amanohikaru/util-service .
+- docker build -t amanohikaru/build-arm-test:ci .
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
-- docker push amanohikaru/util-service
-- curl -X POST http://util.online:9000/api/webhooks/0f1c7be8-5763-4b8d-8cc1-e23b3fd1befb
+- docker push amanohikaru/build-arm-test:ci
+# - curl -X POST http://util.online:9000/api/webhooks/0f1c7be8-5763-4b8d-8cc1-e23b3fd1befb
 
