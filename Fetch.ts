@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-unfetch'
 
 if (process.env.NODE_ENV === 'production') {
     console.debug = () => { }
