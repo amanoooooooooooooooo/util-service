@@ -14,6 +14,7 @@ const DB_NAME = process.env.DB_NAME || 'spider' // 'ethwallet' 'testbankwallet' 
 const ENV = process.env.ENV
 
 console.log('ENV:', ENV)
+console.log('DB_HOST:', DB_HOST)
 
 const sqlConf = {
   connectionLimit: 10,
