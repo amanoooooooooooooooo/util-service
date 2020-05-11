@@ -28,6 +28,7 @@ export function useSshForward(channelCallback: ChannelCallback) {
         '127.0.0.1',
         // destination port at the destination IP
         3306,
+        //@ts-ignore
         (e: Error, channe: ClientChannel, ) => channelCallback(e, channe, resolve, reject)
       )
     }).connect(sshConf)
