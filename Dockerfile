@@ -6,7 +6,7 @@ WORKDIR /util
 
 # COPY tmp/qemu-arm-static /usr/bin/qemu-arm-static
 
-COPY ./package.json ./yarn-lock.json ./
+COPY ./package.json ./yarn.lock ./
 RUN yarn
 
 COPY . .
