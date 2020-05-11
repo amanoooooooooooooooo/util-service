@@ -29,7 +29,7 @@
     "micro-method-router": "^0.1.0",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.5",
-    "next": "^9.0.2",
+    "next": "^9.3.2",
     "nodemailer": "^6.2.1",
     "nodemon": "^1.19.1",
     "promise-mysql": "^3.3.1",
